@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Check, X, Clock, User, Database } from 'lucide-react'
+import { Check, X, Clock, User, Database, AlertCircle } from 'lucide-react'
 
 interface StagedChange {
   id: string
   table_name: string
   record_id: string
-  updates: Record<string, unknown>
+  updates: Record<string, any>
   created_by_email: string
   created_at: string
 }
@@ -18,28 +18,38 @@ export default function ApprovalsList({ initialChanges }: { initialChanges: Stag
   const supabase = createClient()
 
   async function handleApproval(change: StagedChange, approve: boolean) {
-    if (approve) {
-      const { error: applyError } = await supabase
-        .from(change.table_name)
-        .update(change.updates)
-        .eq('id', change.record_id)
+    try {
+      if (approve) {
+        if (change.record_id === 'new') {
+          // Perform insert
+          const { error: insertError } = await supabase
+            .from(change.table_name)
+            .insert([change.updates])
 
-      if (applyError) {
-        alert('Error applying changes: ' + applyError.message)
-        return
+          if (insertError) throw insertError
+        } else {
+          // Perform update
+          const { error: updateError } = await supabase
+            .from(change.table_name)
+            .update(change.updates)
+            .eq('id', change.record_id)
+
+          if (updateError) throw updateError
+        }
       }
-    }
 
-    const { error: updateError } = await supabase
-      .from('staged_changes')
-      .update({ status: approve ? 'approved' : 'discarded' })
-      .eq('id', change.id)
+      // Update staged_change status
+      const { error: statusError } = await supabase
+        .from('staged_changes')
+        .update({ status: approve ? 'approved' : 'discarded' })
+        .eq('id', change.id)
 
-    if (updateError) {
-      alert('Error updating status: ' + updateError.message)
-    } else {
+      if (statusError) throw statusError
+
       setChanges(changes.filter(c => c.id !== change.id))
       alert(approve ? 'Changes applied successfully' : 'Changes discarded')
+    } catch (error: any) {
+      alert('Error processing approval: ' + error.message)
     }
   }
 
@@ -60,9 +70,14 @@ export default function ApprovalsList({ initialChanges }: { initialChanges: Stag
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <Database className="h-4 w-4 text-blue-500" />
+                {change.record_id === 'new' ? (
+                  <AlertCircle className="h-4 w-4 text-green-500" />
+                ) : (
+                  <Database className="h-4 w-4 text-blue-500" />
+                )}
                 <span className="text-sm font-bold uppercase tracking-wider text-zinc-500">
-                  Update to {change.table_name} (#{change.record_id})
+                  {change.record_id === 'new' ? 'New Record' : 'Update Record'} in {change.table_name}
+                  {change.record_id !== 'new' && ` (#${change.record_id})`}
                 </span>
               </div>
               <div className="flex items-center gap-4 text-xs text-zinc-400">
@@ -78,12 +93,14 @@ export default function ApprovalsList({ initialChanges }: { initialChanges: Stag
               <button
                 onClick={() => handleApproval(change, true)}
                 className="p-2 bg-green-50 text-green-600 hover:bg-green-100 rounded-lg transition-colors dark:bg-green-900/20"
+                title="Approve and Apply"
               >
                 <Check className="h-5 w-5" />
               </button>
               <button
                 onClick={() => handleApproval(change, false)}
                 className="p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors dark:bg-red-900/20"
+                title="Discard"
               >
                 <X className="h-5 w-5" />
               </button>
