@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Shield, Loader2, AlertCircle, KeyRound, Mail } from 'lucide-react';
+import { Shield, Loader2, AlertCircle, KeyRound, Mail, CheckCircle2 } from 'lucide-react';
 
 interface LoginFormProps {
   onSuccess: () => void;
@@ -11,23 +11,40 @@ export default function LoginForm({ onSuccess, onBack }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSuccess(false);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      if (!supabase) throw new Error('Supabase client not initialized');
+
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim(),
       });
 
-      if (error) throw error;
-      onSuccess();
+      if (signInError) {
+        if (signInError.message === 'Invalid login credentials') {
+          throw new Error('Invalid email or password. Please try again.');
+        }
+        throw signInError;
+      }
+
+      if (data?.user) {
+        setSuccess(true);
+        // Small delay to show success state
+        setTimeout(() => {
+          onSuccess();
+        }, 800);
+      }
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      console.error('Login error:', err);
+      setError(err.message || 'Failed to sign in. Please check your connection.');
     } finally {
       setLoading(false);
     }
@@ -57,6 +74,7 @@ export default function LoginForm({ onSuccess, onBack }: LoginFormProps) {
                 placeholder="Admin Email"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-6 py-4 text-white focus:border-accent/40 outline-none transition-all font-sans"
                 required
+                disabled={loading || success}
               />
             </div>
             <div className="relative group">
@@ -70,25 +88,35 @@ export default function LoginForm({ onSuccess, onBack }: LoginFormProps) {
                 placeholder="Access Password"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-6 py-4 text-white focus:border-accent/40 outline-none transition-all font-sans"
                 required
+                disabled={loading || success}
               />
             </div>
           </div>
 
           {error && (
-            <div className="p-4 bg-danger/10 border border-danger/20 rounded-2xl flex gap-3 text-danger">
+            <div className="p-4 bg-danger/10 border border-danger/20 rounded-2xl flex gap-3 text-danger animate-in fade-in slide-in-from-top-2">
               <AlertCircle size={18} className="shrink-0" />
               <p className="text-xs font-bold uppercase tracking-widest">{error}</p>
+            </div>
+          )}
+
+          {success && (
+            <div className="p-4 bg-success/10 border border-success/20 rounded-2xl flex gap-3 text-success animate-in fade-in slide-in-from-top-2">
+              <CheckCircle2 size={18} className="shrink-0" />
+              <p className="text-xs font-bold uppercase tracking-widest">Login successful! Redirecting...</p>
             </div>
           )}
 
           <div className="flex flex-col gap-4">
             <button
               type="submit"
-              disabled={loading}
-              className="w-full btn-primary py-5 flex items-center justify-center gap-3 relative overflow-hidden group"
+              disabled={loading || success}
+              className="w-full btn-primary py-5 flex items-center justify-center gap-3 relative overflow-hidden group disabled:opacity-50"
             >
               {loading ? (
                 <Loader2 size={20} className="animate-spin" />
+              ) : success ? (
+                <CheckCircle2 size={20} />
               ) : (
                 <>
                   <span className="relative z-10">Authenticate</span>
@@ -99,7 +127,8 @@ export default function LoginForm({ onSuccess, onBack }: LoginFormProps) {
             <button
               type="button"
               onClick={onBack}
-              className="w-full py-4 text-[10px] font-bold uppercase tracking-widest text-muted hover:text-white transition-colors"
+              disabled={loading || success}
+              className="w-full py-4 text-[10px] font-bold uppercase tracking-widest text-muted hover:text-white transition-colors disabled:opacity-30"
             >
               Return to Website
             </button>

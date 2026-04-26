@@ -14,10 +14,19 @@ const finalKey = NEW_SUPABASE_ANON_KEY || storedKey;
 
 if (finalUrl && finalKey) {
   try {
-    supabase = createClient(finalUrl, finalKey);
+    supabase = createClient(finalUrl, finalKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    });
+    console.log('Supabase initialized with URL:', finalUrl);
   } catch (e) {
     console.error('Supabase init error:', e);
   }
+} else {
+  console.warn('Supabase credentials missing. URL:', !!finalUrl, 'Key:', !!finalKey);
 }
 
 export const configureSupabase = (url: string, key: string) => {

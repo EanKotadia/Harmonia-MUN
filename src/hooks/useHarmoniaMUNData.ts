@@ -217,6 +217,15 @@ export function useHarmoniaMUNData() {
 
     fetchData(true);
 
+    // Auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+        fetchProfile();
+      } else if (event === 'SIGNED_OUT') {
+        setProfile(null);
+      }
+    });
+
     // Set up real-time subscriptions
     const matchesSub = supabase.channel('matches-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'matches' }, fetchSessions)
@@ -255,6 +264,7 @@ export function useHarmoniaMUNData() {
       .subscribe();
 
     return () => {
+      subscription.unsubscribe();
       if (supabase) {
         supabase.removeChannel(matchesSub);
         supabase.removeChannel(scheduleSub);
