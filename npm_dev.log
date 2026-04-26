@@ -29,3 +29,9 @@
  GET /houses 200 in 1273ms (next.js: 5ms, proxy.ts: 12ms, application-code: 1256ms)
  GET /categories 200 in 395ms (next.js: 7ms, proxy.ts: 7ms, application-code: 381ms)
  GET / 200 in 99ms (next.js: 7ms, proxy.ts: 34ms, application-code: 58ms)
+  Reload env: .env.local
+✓ Compiled in 1988ms
+ GET / 200 in 2.6s (next.js: 1334ms, proxy.ts: 771ms, application-code: 477ms)
+ GET /houses 200 in 1612ms (next.js: 199ms, proxy.ts: 22ms, application-code: 1391ms)
+ GET /categories 200 in 507ms (next.js: 78ms, proxy.ts: 12ms, application-code: 417ms)
+ GET / 200 in 52ms (next.js: 7ms, proxy.ts: 9ms, application-code: 36ms)
