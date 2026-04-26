@@ -1,0 +1,46 @@
+
+> tmp-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 535ms
+
+○ Compiling / ...
+ GET / 200 in 7.5s (next.js: 6.2s, proxy.ts: 768ms, application-code: 572ms)
+ GET /houses 200 in 3.1s (next.js: 1431ms, proxy.ts: 11ms, application-code: 1664ms)
+ GET /categories 200 in 1284ms (next.js: 869ms, proxy.ts: 14ms, application-code: 401ms)
+ GET /schedule 200 in 1276ms (next.js: 824ms, proxy.ts: 7ms, application-code: 445ms)
+ GET /results 200 in 1689ms (next.js: 705ms, proxy.ts: 13ms, application-code: 971ms)
+ GET /gallery 200 in 1288ms (next.js: 851ms, proxy.ts: 8ms, application-code: 429ms)
+ GET /notices 200 in 1693ms (next.js: 1221ms, proxy.ts: 14ms, application-code: 459ms)
+ GET /register 200 in 3.0s (next.js: 2.5s, proxy.ts: 14ms, application-code: 474ms)
+✓ Compiled in 681ms
+✓ Compiled in 190ms
+✓ Compiled in 465ms
+ GET / 200 in 2.6s (next.js: 615ms, proxy.ts: 1581ms, application-code: 385ms)
+ GET / 200 in 90ms (next.js: 5ms, proxy.ts: 9ms, application-code: 75ms)
+ GET /houses 200 in 1441ms (next.js: 113ms, proxy.ts: 30ms, application-code: 1298ms)
+ GET /categories 200 in 455ms (next.js: 83ms, proxy.ts: 11ms, application-code: 361ms)
+ GET / 200 in 82ms (next.js: 5ms, proxy.ts: 9ms, application-code: 68ms)
+ GET / 200 in 77ms (next.js: 4ms, proxy.ts: 6ms, application-code: 67ms)
+ GET /houses 200 in 1273ms (next.js: 5ms, proxy.ts: 12ms, application-code: 1256ms)
+ GET /categories 200 in 395ms (next.js: 7ms, proxy.ts: 7ms, application-code: 381ms)
+ GET / 200 in 99ms (next.js: 7ms, proxy.ts: 34ms, application-code: 58ms)
+  Reload env: .env.local
+✓ Compiled in 1988ms
+ GET / 200 in 2.6s (next.js: 1334ms, proxy.ts: 771ms, application-code: 477ms)
+ GET /houses 200 in 1612ms (next.js: 199ms, proxy.ts: 22ms, application-code: 1391ms)
+ GET /categories 200 in 507ms (next.js: 78ms, proxy.ts: 12ms, application-code: 417ms)
+ GET / 200 in 52ms (next.js: 7ms, proxy.ts: 9ms, application-code: 36ms)
+✓ Compiled in 4.1s
+✓ Compiled in 430ms
+✓ Compiled in 332ms
+ GET / 200 in 889ms (next.js: 312ms, proxy.ts: 317ms, application-code: 259ms)
+ GET /categories 200 in 1690ms (next.js: 118ms, proxy.ts: 13ms, application-code: 1560ms)
+ GET /results 200 in 928ms (next.js: 58ms, proxy.ts: 7ms, application-code: 863ms)
+ GET /schedule 200 in 452ms (next.js: 58ms, proxy.ts: 21ms, application-code: 373ms)
+○ Compiling /admin/login ...
+ GET /admin/login 200 in 5.9s (next.js: 5.7s, proxy.ts: 7ms, application-code: 210ms)
