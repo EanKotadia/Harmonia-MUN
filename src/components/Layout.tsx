@@ -101,7 +101,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="xl:hidden fixed inset-0 top-0 bg-[#0d0d0d] p-8 flex flex-col z-[150]"
+                className="xl:hidden fixed inset-0 top-0 bg-bg-dark p-8 flex flex-col z-[150]"
               >
                 <div className="flex items-center justify-between h-[80px] mb-12">
                    <div className="flex items-center gap-4">
@@ -191,7 +191,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
           <div className="w-full h-px bg-border my-4" />
 
           <div className="flex flex-col md:flex-row justify-between w-full gap-4 font-sans text-[12px] text-subtle">
-            <span>© 2026 Shalom Hills International School | Made by Ean Kotadia, Chetanya Singh and Tanush Kansal</span>
+            <span>© 2026 Shalom Group of Schools International School | Made by Ean Kotadia, Chetanya Singh and Tanush Kansal</span>
           </div>
         </div>
       </footer>
