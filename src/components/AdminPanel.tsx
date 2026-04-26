@@ -151,7 +151,7 @@ const CategoryEditor = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
             Description
@@ -164,25 +164,36 @@ const CategoryEditor = ({
             placeholder="Committee description..."
           />
         </div>
-        <div className="space-y-4">
-          <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
-            Background Guide Link (PDF)
-            <div className="h-[1px] flex-1 bg-white/5" />
-          </span>
-          <input
-            type="text"
-            value={cat.bg_guide_url || ''}
-            onChange={(e) => updateCategory({ bg_guide_url: e.target.value })}
-            className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-accent font-medium outline-none focus:border-accent/50 transition-all"
-            placeholder="https://.../guide.pdf"
-          />
-          <div className="p-4 bg-accent/5 border border-accent/10 rounded-2xl">
-             <p className="text-[10px] text-accent/60 uppercase font-bold tracking-widest leading-relaxed">
-                Ensure the link is public and leads directly to the PDF file.
-             </p>
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
+              Image URL
+              <div className="h-[1px] flex-1 bg-white/5" />
+            </span>
+            <input
+              type="text"
+              value={cat.image_url || ''}
+              onChange={(e) => updateCategory({ image_url: e.target.value })}
+              className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-white font-medium outline-none focus:border-accent/50 transition-all"
+              placeholder="https://.../committee-image.jpg"
+            />
+          </div>
+          <div className="space-y-4">
+            <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
+              Background Guide Link (PDF)
+              <div className="h-[1px] flex-1 bg-white/5" />
+            </span>
+            <input
+              type="text"
+              value={cat.bg_guide_url || ''}
+              onChange={(e) => updateCategory({ bg_guide_url: e.target.value })}
+              className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-accent font-medium outline-none focus:border-accent/50 transition-all"
+              placeholder="https://.../guide.pdf"
+            />
           </div>
         </div>
       </div>
+
 
 
             <div className="space-y-6">

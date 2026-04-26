@@ -25,6 +25,8 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
     { id: 'schedule', label: 'Schedule' },
     { id: 'rankings', label: 'Rankings' },
     { id: 'notices', label: 'Notices' },
+    { id: 'gallery', label: 'Gallery' },
+    { id: 'sponsors', label: 'Sponsors' },
   ];
 
   return (
@@ -48,10 +50,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                 className="h-10 md:h-12 object-contain group-hover:scale-105 transition-transform"
                 referrerPolicy="no-referrer"
               />
-              <div className="hidden lg:flex flex-col items-start translate-y-[-2px]">
-                 <span className="font-display text-2xl tracking-tighter uppercase text-white leading-none">Harmonia</span>
-                 <span className="font-ui text-[8px] font-bold tracking-[0.4em] uppercase text-accent leading-none">MUN 2026</span>
-              </div>
+
             </button>
           </div>
 
@@ -109,10 +108,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                         className="h-10 object-contain"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="flex flex-col">
-                        <span className="font-display text-xl tracking-tighter uppercase text-white leading-none">Harmonia</span>
-                        <span className="font-ui text-[7px] font-bold tracking-[0.4em] uppercase text-accent leading-none">MUN 2026</span>
-                      </div>
+
                    </div>
                    <button onClick={() => setIsMenuOpen(false)} className="p-2 text-white/60 hover:text-white transition-colors">
                       <X size={32} />

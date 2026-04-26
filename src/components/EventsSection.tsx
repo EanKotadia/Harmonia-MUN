@@ -26,7 +26,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
     "Background Guides should be thoroughly reviewed prior to the commencement of the conference."
   ];
 
-  const renderEventCard = (cat: Committee) => {
+    const renderEventCard = (cat: Committee) => {
     return (
       <motion.div
         key={cat.id}
@@ -35,32 +35,33 @@ export default function EventsSection({ categories, matches, members, setActiveT
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-white/5 border border-border rounded-[32px] p-8 flex flex-col h-full hover:border-accent/30 transition-all group cursor-pointer"
+        className="bg-white/5 border border-border rounded-[32px] overflow-hidden flex flex-col h-full hover:border-accent/30 transition-all group cursor-pointer"
       >
-        <div className="flex items-start justify-between mb-6">
-          <motion.div layoutId={`icon-${cat.id}`} className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform overflow-hidden">
-            {cat.icon || '🏆'}
-          </motion.div>
-          <div className="text-right">
-            <span className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted block mb-1">
-              MUN Committee
-            </span>
-          </div>
+        <div className="aspect-video bg-bg-dark overflow-hidden relative border-b border-white/5">
+           {cat.image_url ? (
+             <img src={cat.image_url} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={cat.name} />
+           ) : (
+             <div className="w-full h-full flex items-center justify-center text-white/5">
+               <Layers size={48} />
+             </div>
+           )}
+           <div className="absolute top-4 left-4 w-12 h-12 bg-bg/80 backdrop-blur-xl rounded-xl flex items-center justify-center text-2xl">
+              {cat.icon || '🏆'}
+           </div>
         </div>
 
-        <motion.h3 layoutId={`title-${cat.id}`} className="text-3xl font-display uppercase tracking-wider mb-4">{cat.name}</motion.h3>
-
-        <div className="mb-8">
+        <div className="p-8 space-y-4 flex-1 flex flex-col">
+          <motion.h3 layoutId={`title-${cat.id}`} className="text-3xl font-display uppercase tracking-wider">{cat.name}</motion.h3>
           <p className="text-muted text-sm line-clamp-2">{cat.description}</p>
-        </div>
-
-        <div className="mt-auto flex items-center justify-between text-accent font-ui text-[10px] font-bold uppercase tracking-widest group-hover:gap-2 transition-all">
-          Explore Committee Details
-          <ArrowRight size={14} />
+          <div className="mt-auto pt-6 flex items-center justify-between text-accent font-ui text-[10px] font-bold uppercase tracking-widest group-hover:gap-2 transition-all">
+            Explore Committee Details
+            <ArrowRight size={14} />
+          </div>
         </div>
       </motion.div>
     );
   };
+
 
   return (
     <div id="events" className="max-w-7xl mx-auto px-6 py-24 space-y-32">
@@ -87,7 +88,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
               </button>
 
               <div className="overflow-y-auto p-8 md:p-16 space-y-12">
-                <div className="flex flex-col md:flex-row gap-12 items-start">
+                                <div className="flex flex-col md:flex-row gap-12 items-start">
                   <div className="flex-1 space-y-12 w-full">
                     <div className="flex items-center gap-8">
                       <motion.div layoutId={`icon-${expandedId}`} className="w-24 h-24 bg-white/5 rounded-[32px] flex items-center justify-center text-6xl overflow-hidden">
@@ -111,29 +112,24 @@ export default function EventsSection({ categories, matches, members, setActiveT
                             About the Committee
                           </h4>
                           <div className="bg-white/5 border border-border rounded-3xl p-8">
-                            <p className="text-text/70 leading-relaxed whitespace-pre-line">
+                            <p className="text-text/70 leading-relaxed whitespace-pre-line line-clamp-6">
                               {expandedCategory.description || 'Information for this committee will be updated soon.'}
                             </p>
                           </div>
                         </div>
 
-                        {expandedCategory.bg_guide_url && (
-                          <div className="pt-4">
-                             <h4 className="text-xl font-display uppercase tracking-widest mb-6 flex items-center gap-3">
-                                <FileText className="text-accent" size={20} />
-                                Resources
-                             </h4>
-                             <a
-                                href={expandedCategory.bg_guide_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-bg font-ui text-[10px] font-bold uppercase tracking-widest rounded-xl hover:scale-105 transition-all shadow-xl shadow-accent/20"
-                             >
-                                <FileText size={16} />
-                                Background Guide (PDF)
-                             </a>
-                          </div>
-                        )}
+                        <div className="pt-4">
+                           <button
+                             onClick={() => {
+                               window.location.hash = `committees/${expandedCategory.slug || expandedCategory.id}`;
+                               setExpandedId(null);
+                             }}
+                             className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-bg font-ui text-[11px] font-bold uppercase tracking-widest rounded-2xl hover:scale-105 transition-all shadow-xl shadow-accent/20"
+                           >
+                              Full Committee Details & Resources
+                              <ArrowRight size={16} />
+                           </button>
+                        </div>
                       </div>
 
                       <div className="space-y-8">
@@ -142,7 +138,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
                             Executive Board
                          </h4>
                          <div className="space-y-4">
-                            {committeeEB.length > 0 ? committeeEB.map(member => (
+                            {committeeEB.slice(0, 2).map(member => (
                                <div key={member.id} className="flex items-center gap-6 p-6 bg-white/5 border border-white/5 rounded-2xl">
                                   <div className="w-14 h-14 rounded-xl overflow-hidden bg-bg-dark border border-white/10 shrink-0">
                                      <img src={member.image_url || ''} alt={member.name} className="w-full h-full object-cover" />
@@ -152,7 +148,8 @@ export default function EventsSection({ categories, matches, members, setActiveT
                                      <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent">{member.role}</p>
                                   </div>
                                </div>
-                            )) : (
+                            ))}
+                            {committeeEB.length === 0 && (
                                <div className="p-8 border border-dashed border-white/10 rounded-2xl text-center">
                                   <p className="text-[10px] font-bold uppercase tracking-widest text-muted">EB Members to be announced</p>
                                </div>
@@ -162,6 +159,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
                     </div>
                   </div>
                 </div>
+
               </div>
             </motion.div>
           </div>

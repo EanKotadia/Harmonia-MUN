@@ -28,13 +28,21 @@ export default function App() {
       const hash = window.location.hash.replace('#', '');
       if (hash === 'admin') {
         setActiveTab('admin');
+      } else if (hash.startsWith('committees/')) {
+        const slug = hash.split('/')[1];
+        const committee = categories.find(c => c.slug === slug || c.id === slug);
+        if (committee) {
+          setSelectedCategory(committee.id);
+          setActiveTab('committee-detail');
+        }
       }
     };
 
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [categories]);
+
 
 
   const liveItems = React.useMemo(() => schedule.filter(s => s.status === 'live'), [schedule]);
@@ -49,7 +57,7 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-bg-dark gap-6">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-bg gap-6">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-accent/20 border-t-accent rounded-full animate-spin" />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -63,7 +71,7 @@ export default function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-bg-dark p-6 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-bg p-6 text-center">
         <div className="w-20 h-20 bg-danger/10 text-danger rounded-3xl flex items-center justify-center mb-6 border border-danger/20">
           <AlertCircle size={40} />
         </div>
@@ -113,26 +121,203 @@ export default function App() {
     switch (activeTab) {
       case 'admin':
         if (!profile) return <LoginForm onSuccess={() => refresh()} onBack={() => setActiveTab('home')} />;
+      case 'gallery':
+        return (
+          <div className="min-h-screen pt-24 pb-20 px-6 md:px-12">
+            <div className="max-w-7xl mx-auto space-y-16">
+              <div className="text-center space-y-4">
+                <p className="sec-label">Visuals</p>
+                <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Gallery</h2>
+                <p className="text-white/40 max-w-2xl mx-auto">Capturing moments of diplomacy, debate, and discovery.</p>
+              </div>
+
+              {gallery.length === 0 ? (
+                <div className="h-[60vh] rounded-[3rem] border border-white/5 bg-white/5 flex flex-col items-center justify-center gap-6 overflow-hidden relative">
+                  <ImageIcon size={64} className="text-white/10" />
+                  <p className="font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-muted">Media will be uploaded soon</p>
+                </div>
+              ) : (
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                  {gallery.map((item) => (
+                    <div key={item.id} className="relative group overflow-hidden rounded-[2rem] border border-white/5 bg-surface break-inside-avoid shadow-2xl">
+                       {item.type === 'video' ? (
+                          <div className="relative aspect-video">
+                             <iframe
+                               src={getEmbedUrl(item.url)}
+                               className="w-full h-full"
+                               allowFullScreen
+                             />
+                          </div>
+                       ) : (
+                         <img
+                           src={item.url}
+                           alt={item.title}
+                           className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                           referrerPolicy="no-referrer"
+                         />
+                       )}
+                       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
+                         <span className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent mb-2">{item.type}</span>
+                         <h3 className="font-display text-2xl text-white uppercase tracking-wider">{item.title}</h3>
+                       </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+
+      case 'sponsors':
+        return (
+          <div className="max-w-7xl mx-auto px-6 py-32">
+            <div className="text-center mb-24">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                 <div className="h-[1px] w-8 bg-accent/40" />
+                 <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Partners</span>
+                 <div className="h-[1px] w-8 bg-accent/40" />
+              </div>
+              <h1 className="text-7xl md:text-9xl font-display uppercase text-white">Our Sponsors</h1>
+              <p className="text-muted text-xl mt-6">Gratitude to our partners who make Harmonia MUN Chapter 2 possible.</p>
+            </div>
+
+            <div className="bg-surface border border-white/5 rounded-[4rem] p-12 lg:p-24 min-h-[400px] flex items-center justify-center">
+               <div className="space-y-12 text-center w-full">
+                 <p className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-muted">Sponsorship opportunities available</p>
+                 <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+                    {sponsors.length === 0 ? [1,2,3,4].map(i => (
+                      <div key={i} className="h-24 flex items-center justify-center border border-dashed border-white/20 rounded-2xl opacity-20">
+                         <span className="text-[10px] font-bold uppercase">Partner {i}</span>
+                      </div>
+                    )) : sponsors.map(s => (
+                      <div key={s.id} className="flex items-center justify-center grayscale hover:grayscale-0 transition-all p-6 bg-white/5 rounded-3xl border border-white/5">
+                         <img src={s.logo_url || ''} alt={s.name} className="max-h-20 object-contain" />
+                      </div>
+                    ))}
+                 </div>
+               </div>
+            </div>
+          </div>
+        );
+
         return <AdminPanel sessions={sessions} schedule={schedule} categories={categories} notices={notices} gallery={gallery} culturalResults={culturalResults} members={members} sponsors={sponsors} profile={profile} settings={settings} refresh={refresh} onBack={() => setActiveTab('home')} />;
+            case 'committee-detail':
+        const committee = categories.find(c => c.id === selectedCategory);
+        const committeeMembers = members.filter(m => m.committee_id === selectedCategory && m.category === 'EB');
+        if (!committee) return null;
+
+        return (
+          <div className="min-h-screen bg-bg">
+            <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+              <button
+                onClick={() => {
+                  window.location.hash = 'committees';
+                  setActiveTab('committees');
+                }}
+                className="flex items-center gap-2 text-muted hover:text-accent transition-all mb-12 font-ui text-[10px] font-bold uppercase tracking-widest"
+              >
+                <ChevronRight className="rotate-180" size={14} /> Back to Hall
+              </button>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="space-y-12">
+                   <div className="space-y-6">
+                      <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center text-5xl border border-white/5">
+                        {committee.icon || '🛡️'}
+                      </div>
+                      <h1 className="text-6xl md:text-8xl font-display uppercase tracking-tight text-white leading-none">
+                        {committee.name}
+                      </h1>
+                      <div className="flex flex-wrap gap-4">
+                        <span className="px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full font-ui text-[10px] font-bold uppercase tracking-widest text-accent">
+                          MUN 2026
+                        </span>
+                        {committee.bg_guide_url && (
+                           <span className="px-4 py-1.5 bg-success/10 border border-success/20 rounded-full font-ui text-[10px] font-bold uppercase tracking-widest text-success">
+                             Resource Ready
+                           </span>
+                        )}
+                      </div>
+                   </div>
+
+                   <div className="prose prose-invert prose-lg text-white/60 font-sans leading-relaxed">
+                      <p className="whitespace-pre-line">{committee.description}</p>
+                   </div>
+
+                   {committee.bg_guide_url && (
+                     <div className="pt-8 border-t border-white/5">
+                        <h4 className="text-xl font-display uppercase tracking-widest text-white mb-6">Study Material</h4>
+                        <a
+                          href={committee.bg_guide_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary px-10 py-5 rounded-2xl flex items-center justify-center gap-3 w-fit"
+                        >
+                          <FileText size={20} /> Download Background Guide (PDF)
+                        </a>
+                     </div>
+                   )}
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-12">
+                   <div className="aspect-[16/10] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative bg-white/5">
+                      {committee.image_url ? (
+                        <img src={committee.image_url} alt={committee.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-white/10">
+                           <Layers size={80} />
+                        </div>
+                      )}
+                   </div>
+
+                   <div className="space-y-8">
+                      <div className="flex items-center gap-4">
+                         <h4 className="text-xl font-display uppercase tracking-widest text-white">Executive Board</h4>
+                         <div className="h-px flex-1 bg-white/5" />
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         {committeeMembers.length > 0 ? committeeMembers.map(eb => (
+                            <div key={eb.id} className="p-6 bg-white/5 border border-white/5 rounded-3xl flex items-center gap-6">
+                               <div className="w-16 h-16 rounded-2xl overflow-hidden bg-bg border border-white/10 shrink-0">
+                                  <img src={eb.image_url || ''} className="w-full h-full object-cover" alt={eb.name} />
+                               </div>
+                               <div>
+                                  <p className="font-display text-xl text-white uppercase tracking-wider">{eb.name}</p>
+                                  <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent">{eb.role}</p>
+                               </div>
+                            </div>
+                         )) : (
+                            <div className="col-span-full py-12 border border-dashed border-white/5 rounded-3xl text-center">
+                               <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Board members will be announced soon</p>
+                            </div>
+                         )}
+                      </div>
+                   </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        );
+
       case 'events':
         return <EventsSection categories={categories} matches={sessions} members={members} setActiveTab={setActiveTab} />;
       case 'home':
         return (
           <div className="space-y-0">
             {/* HERO SECTION */}
-            <section className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-6 bg-bg overflow-hidden" id="home">
-              <div className="relative z-10 max-w-4xl space-y-12">
+            <section className="relative py-32 md:py-48 flex flex-col items-center justify-center text-center px-6 bg-bg overflow-hidden" id="home">
+              <div className="relative z-10 max-w-4xl space-y-16">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className="space-y-6"
+                  className="space-y-8"
                 >
-                  <p className="font-ui text-[14px] md:text-[16px] font-bold uppercase tracking-[0.6em] text-accent">Shalom Group of Schools Presents</p>
-                  <h1 className="text-[14vw] md:text-[9vw] font-display uppercase tracking-tight leading-[0.85] text-white">
+                  <p className="font-ui text-[14px] md:text-[18px] font-bold uppercase tracking-[0.6em] text-accent">Shalom Group of Schools Presents</p>
+                  <h1 className="text-[14vw] md:text-[10vw] font-display uppercase tracking-tight leading-[0.8] text-white">
                     Harmonia <br/> <span className="text-accent">MUN 2026</span>
                   </h1>
-                  <p className="font-ui text-lg md:text-2xl font-medium tracking-[0.3em] uppercase text-white/60 pt-4">
+                  <p className="font-ui text-lg md:text-2xl font-medium tracking-[0.2em] uppercase text-white/50 max-w-2xl mx-auto">
                     Beyond Words. Towards Action.
                   </p>
                 </motion.div>
@@ -141,29 +326,19 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
-                  className="flex flex-wrap items-center justify-center gap-6"
                 >
                   <button
                     onClick={() => setActiveTab('committees')}
-                    className="btn-primary px-12 py-5 text-[12px] shadow-2xl shadow-accent/20"
+                    className="btn-primary px-16 py-6 text-[13px] rounded-2xl shadow-2xl shadow-accent/20"
                   >
-                    Explore Committees
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('about')}
-                    className="btn-ghost px-12 py-5 text-[12px] border-white/20 text-white hover:border-white hover:bg-white/5"
-                  >
-                    About Conference
+                    Explore Conference
                   </button>
                 </motion.div>
               </div>
-
-              {/* Minimal decorative element */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 blur-[120px] rounded-full -z-0 pointer-events-none" />
             </section>
 
             {/* QUICK STATS */}
-            <section className="py-24 border-y border-white/5 bg-bg-dark">
+            <section className="py-24 border-y border-white/5 bg-bg">
               <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
                   {[
@@ -300,7 +475,7 @@ export default function App() {
                       {gallery.slice(0, 6).map((item) => (
                         <div key={item.id} className="relative group overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 break-inside-avoid shadow-2xl">
                            {item.type === 'video' ? (
-                             <div className="aspect-video bg-bg-dark flex items-center justify-center">
+                             <div className="aspect-video bg-bg flex items-center justify-center">
                                <ImageIcon size={48} className="text-white/10" />
                              </div>
                            ) : (
@@ -353,12 +528,16 @@ export default function App() {
                 <p className="text-muted text-xl max-w-2xl">Shape the world's destiny in our high-stakes simulation councils.</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {categories.map((committee, i) => (
                   <motion.div
                     key={committee.id}
-                    whileHover={{ y: -10 }}
-                    className="card-glass overflow-hidden group h-full flex flex-col"
+                    layoutId={`card-${committee.id}`}
+                    className="card-glass overflow-hidden group h-full flex flex-col cursor-pointer"
+                    onClick={() => {
+                      setSelectedCategory(committee.id);
+                      setActiveTab('committee-detail');
+                    }}
                   >
                     <div className="aspect-[4/5] relative bg-white/5 flex items-center justify-center overflow-hidden">
                       {committee.image_url ? (
@@ -371,38 +550,21 @@ export default function App() {
                       ) : (
                         <div className="text-6xl mb-4 group-hover:scale-110 transition-transform relative z-10">{committee.icon || '🛡️'}</div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />
                       <div className="absolute inset-0 flex flex-col justify-end p-8">
-                        <div className="flex items-center justify-between mb-2">
-                           <h4 className="text-3xl font-display uppercase tracking-wider text-white">{committee.name}</h4>
-                           {committee.bg_guide_url && (
-                              <a 
-                                href={committee.bg_guide_url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="p-2 bg-white/10 hover:bg-accent hover:text-bg rounded-lg transition-colors"
-                                title="Download Background Guide"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <FileText size={16} />
-                              </a>
-                           )}
-                        </div>
-                        <p className="text-white/60 text-sm mb-6 line-clamp-3">{committee.description}</p>
-                        <button
-                          onClick={() => {
-                            setSelectedCategory(committee.id);
-                            setActiveTab('events');
-                          }}
-                          className="w-full py-4 bg-accent/10 border border-accent/20 hover:bg-accent text-accent hover:text-bg-dark transition-all font-ui text-[10px] font-bold uppercase tracking-widest rounded-xl"
-                        >
-                          Explore Committee
-                        </button>
+                         <h3 className="text-2xl font-display text-white uppercase tracking-wider mb-2">{committee.name}</h3>
+                         <div className="h-0 group-hover:h-auto overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
+                            <p className="text-white/60 text-xs line-clamp-2 mb-4">{committee.description}</p>
+                            <button className="w-full py-3 bg-accent text-bg font-ui text-[9px] font-bold uppercase tracking-widest rounded-xl">
+                               More Info & Resources
+                            </button>
+                         </div>
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
+
             </div>
           </section>
         );
@@ -451,7 +613,7 @@ export default function App() {
                                  )}
                               </div>
 
-                              <div className="relative z-10 w-[60px] h-[60px] bg-bg-dark border border-white/20 rounded-full flex items-center justify-center shrink-0">
+                              <div className="relative z-10 w-[60px] h-[60px] bg-bg border border-white/20 rounded-full flex items-center justify-center shrink-0">
                                  <Clock size={20} className="text-accent" />
                               </div>
 
