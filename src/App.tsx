@@ -2,7 +2,7 @@ import AdminPanel from './components/AdminPanel';
 import LoginForm from './components/LoginForm';
 import SupabaseConfig from './components/SupabaseConfig';
 import { configureSupabase, supabase } from './lib/supabase';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import ScheduleCard from './components/ScheduleCard';
 import EventsSection from './components/EventsSection';
@@ -23,6 +23,19 @@ export default function App() {
   const [noticePriority, setNoticePriority] = useState<'all' | 'low' | 'medium' | 'high'>('all');
   const [expandedNoticeId, setExpandedNoticeId] = useState<number | null>(null);
   const { sessions, schedule, settings, categories, gallery, notices, culturalResults, members, sponsors, profile, loading, error, refresh } = useHarmoniaMUNData();
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'admin') {
+        setActiveTab('admin');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
 
   const liveItems = React.useMemo(() => schedule.filter(s => s.status === 'live'), [schedule]);
   const upcomingItems = React.useMemo(() => schedule.filter(s => s.status === 'upcoming').slice(0, 3), [schedule]);
