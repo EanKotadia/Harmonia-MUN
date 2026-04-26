@@ -169,7 +169,7 @@ const CategoryEditor = ({
           </span>
           <button
             onClick={addRanking}
-            className="ml-4 flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-accent hover:text-black transition-all"
+            className="ml-4 flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-accent hover:text-bg transition-all"
           >
             <Plus size={14} /> Add
           </button>
@@ -307,7 +307,7 @@ export default function AdminPanel({
       <aside className="w-full lg:w-72 bg-[#0a0a0a] border-r border-white/5 flex flex-col flex-shrink-0 z-50">
         <div className="p-8 border-b border-white/5">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-10 h-10 bg-accent rounded-1.5xl flex items-center justify-center text-black shadow-lg shadow-accent/20">
+            <div className="w-10 h-10 bg-accent rounded-1.5xl flex items-center justify-center text-bg shadow-lg shadow-accent/20">
               <Shield size={20} />
             </div>
             <div>
@@ -334,7 +334,7 @@ export default function AdminPanel({
               className={cn(
                 "w-full flex items-center gap-4 px-5 py-4 rounded-2xl transition-all font-ui text-[10px] font-bold uppercase tracking-widest",
                 activeTab === item.id 
-                  ? "bg-accent text-black shadow-lg shadow-accent/10" 
+                  ? "bg-accent text-bg shadow-lg shadow-accent/10"
                   : "text-muted hover:bg-white/5 hover:text-white"
               )}
             >
@@ -362,8 +362,8 @@ export default function AdminPanel({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-[#0d0d0d]">
-        <header className="sticky top-0 z-40 bg-[#0d0d0d]/80 backdrop-blur-xl border-b border-white/5 h-32 flex items-center px-8 lg:px-12 justify-between">
+      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-bg-dark">
+        <header className="sticky top-0 z-40 bg-bg-dark/80 backdrop-blur-xl border-b border-white/5 h-32 flex items-center px-8 lg:px-12 justify-between">
           <div className="flex items-center gap-6">
             <div className="w-14 h-14 bg-white/5 rounded-[1.5rem] flex items-center justify-center text-accent border border-white/5 shadow-2xl">
               {activeTab === 'sessions' && <Activity size={24} />}
@@ -409,7 +409,7 @@ export default function AdminPanel({
                     break;
                 }
               }}
-              className="px-6 py-3 bg-accent text-black rounded-xl text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-accent/20"
+              className="px-6 py-3 bg-accent text-bg rounded-xl text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-accent/20"
             >
               <Plus size={16} /> New {activeTab.replace(/s$/, '')}
             </button>
@@ -447,7 +447,7 @@ export default function AdminPanel({
           {activeTab === 'sessions' && (
             <div className="space-y-12">
                {/* Search & Filter Bar */}
-               <div className="bg-[#141414] border border-white/5 p-4 rounded-[2.5rem] flex flex-col gap-6">
+               <div className="bg-surface border border-white/5 p-4 rounded-[2.5rem] flex flex-col gap-6">
                   <div className="relative">
                     <input
                       type="text"
@@ -465,7 +465,7 @@ export default function AdminPanel({
                          onClick={() => setSelectedCategory(null)}
                          className={cn(
                            "px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap",
-                           !selectedCategory ? "bg-accent text-black shadow-lg" : "bg-white/5 text-muted hover:text-white"
+                           !selectedCategory ? "bg-accent text-bg shadow-lg" : "bg-white/5 text-muted hover:text-white"
                          )}
                        >
                          All Categories
@@ -476,7 +476,7 @@ export default function AdminPanel({
                            onClick={() => setSelectedCategory(selectedCategory === cat.id ? null : cat.id)}
                            className={cn(
                              "px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap",
-                             selectedCategory === cat.id ? "bg-accent text-black shadow-lg" : "bg-white/5 text-muted hover:text-white"
+                             selectedCategory === cat.id ? "bg-accent text-bg shadow-lg" : "bg-white/5 text-muted hover:text-white"
                            )}
                          >
                            {cat.name}
@@ -492,7 +492,7 @@ export default function AdminPanel({
                         }
                         addItem('matches', { committee_id: targetId, session_no: sessions.length + 1, status: 'upcoming', venue: 'Main Hall' });
                       }}
-                      className="bg-accent/80 hover:bg-accent text-black px-8 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-xl shadow-accent/10 whitespace-nowrap flex items-center gap-2"
+                      className="bg-accent/80 hover:bg-accent text-bg px-8 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all shadow-xl shadow-accent/10 whitespace-nowrap flex items-center gap-2"
                     >
                       <Plus size={16} /> Add Session
                     </button>
@@ -517,7 +517,7 @@ export default function AdminPanel({
                         </div>
                         <button
                           onClick={() => addItem('matches', { committee_id: cat.id, session_no: catSessions.length + 1, status: 'upcoming', venue: 'Main Hall' })}
-                          className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-accent hover:text-black border border-white/5 hover:border-accent rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all"
+                          className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-accent hover:text-bg border border-white/5 hover:border-accent rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all"
                         >
                           <Plus size={16} /> Add Session
                         </button>
@@ -528,7 +528,7 @@ export default function AdminPanel({
                           <motion.div
                              layout
                              key={s.id}
-                             className="bg-[#141414] border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl"
+                             className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl"
                           >
                              <div className="flex items-start justify-between">
                                <div className="flex items-center gap-6">
@@ -605,7 +605,7 @@ export default function AdminPanel({
 
             {activeTab === 'schedule' && (
               <motion.div key="schedule" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                <div className="bg-[#141414] border border-white/5 p-6 rounded-[2rem] space-y-4">
+                <div className="bg-surface border border-white/5 p-6 rounded-[2rem] space-y-4">
                   {schedule.map(si => (
                     <div key={si.id} className="bg-white/5 border border-white/5 rounded-2xl p-6 flex flex-col lg:flex-row items-center gap-8 group hover:border-accent/20 transition-all">
                       <div className="flex items-center gap-4 w-full lg:w-48">
@@ -665,7 +665,7 @@ export default function AdminPanel({
             {activeTab === 'members' && (
               <motion.div key="members" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {members.map(m => (
-                  <div key={m.id} className="bg-[#141414] border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all">
+                  <div key={m.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all">
                     <div className="flex justify-between items-start">
                       <div className="w-24 h-24 rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center">
                         {m.image_url ? (
@@ -747,7 +747,7 @@ export default function AdminPanel({
               <div className="space-y-8">
                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                   {sponsors.map(s => (
-                    <div key={s.id} className="bg-[#141414] border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl">
+                    <div key={s.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl">
                       <div className="h-32 rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center p-6 relative group">
                         {s.logo_url ? <img src={s.logo_url} className="max-w-full max-h-full object-contain" /> : <div className="text-muted flex flex-col items-center gap-2"><Heart size={32} /><span className="text-[8px] font-bold">NO LOGO</span></div>}
                       </div>
@@ -794,7 +794,7 @@ export default function AdminPanel({
             {activeTab === 'notices' && (
               <div className="space-y-6">
                 {notices.map(n => (
-                  <div key={n.id} className="bg-[#141414] border border-white/5 rounded-[2.5rem] p-8 space-y-6">
+                  <div key={n.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-6">
                     <div className="flex items-center justify-between">
                       <input
                         type="text"
@@ -832,12 +832,12 @@ export default function AdminPanel({
             {activeTab === 'gallery' && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {gallery.map(item => (
-                  <div key={item.id} className="bg-[#141414] border border-white/5 rounded-[2.5rem] p-6 space-y-6 group">
+                  <div key={item.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-6 space-y-6 group">
                      <div className="aspect-video rounded-2xl overflow-hidden bg-white/5 relative">
                         <img src={item.url} className="w-full h-full object-cover" />
                         <button 
                           onClick={() => deleteItem('gallery', item.id)}
-                          className="absolute top-4 right-4 p-3 bg-black/60 backdrop-blur-xl text-white/40 hover:text-danger rounded-xl opacity-0 group-hover:opacity-100 transition-all"
+                          className="absolute top-4 right-4 p-3 bg-bg-dark/60 backdrop-blur-xl text-white/40 hover:text-danger rounded-xl opacity-0 group-hover:opacity-100 transition-all"
                         >
                           <Trash2 size={18} />
                         </button>
@@ -881,7 +881,7 @@ export default function AdminPanel({
 
             {activeTab === 'settings' && (
               <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl space-y-12">
-                <div className="bg-[#141414] border border-white/5 rounded-[3rem] p-10 space-y-12 shadow-2xl">
+                <div className="bg-surface border border-white/5 rounded-[3rem] p-10 space-y-12 shadow-2xl">
                    <div className="grid md:grid-cols-2 gap-12">
                       <div className="space-y-12">
                         {[

@@ -1,4 +1,5 @@
 import AdminPanel from './components/AdminPanel';
+import LoginForm from './components/LoginForm';
 import SupabaseConfig from './components/SupabaseConfig';
 import { configureSupabase, supabase } from './lib/supabase';
 import React, { useState } from 'react';
@@ -77,7 +78,7 @@ export default function App() {
 
   const festivalName = settings['festival_name'] || 'Harmonia MUN 2026';
   const festivalSubtitle = settings['festival_subtitle'] || 'Harmonia Model United Nations';
-  const festivalDates = settings['festival_dates'] || 'April 2026 - Shalom Hills';
+  const festivalDates = settings['festival_dates'] || 'April 2026 - Shalom Group of Schools';
   const announcementText = settings['announcement_text'];
   const footerText = settings['footer_text'];
   const schoolLogoUrl = settings['school_logo_url'];
@@ -97,7 +98,9 @@ export default function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'admin': return <AdminPanel sessions={sessions} schedule={schedule} categories={categories} notices={notices} gallery={gallery} culturalResults={culturalResults} members={members} sponsors={sponsors} profile={profile} settings={settings} refresh={refresh} onBack={() => setActiveTab('home')} />;
+      case 'admin':
+        if (!profile) return <LoginForm onSuccess={() => refresh()} onBack={() => setActiveTab('home')} />;
+        return <AdminPanel sessions={sessions} schedule={schedule} categories={categories} notices={notices} gallery={gallery} culturalResults={culturalResults} members={members} sponsors={sponsors} profile={profile} settings={settings} refresh={refresh} onBack={() => setActiveTab('home')} />;
       case 'gallery':
         return (
           <div className="min-h-screen pt-24 pb-20 px-6 md:px-12">
@@ -140,7 +143,7 @@ export default function App() {
                            referrerPolicy="no-referrer"
                          />
                        )}
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
+                       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
                          <span className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent mb-2">{item.type}</span>
                          <h3 className="font-display text-2xl text-white uppercase tracking-wider">{item.title}</h3>
                        </div>
@@ -157,61 +160,69 @@ export default function App() {
         return (
           <div className="space-y-0">
             {/* HERO SECTION */}
-            <section className="relative h-[100vh] flex flex-col items-center justify-center overflow-hidden" id="home">
-              <div className="absolute inset-0 bg-[#0d0d0d]" />
+            <section className="relative min-h-[90vh] lg:h-screen flex items-center overflow-hidden bg-bg" id="home">
+              <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-dark to-bg opacity-50" />
               
-              {/* Grid Overlay */}
-              <div 
-                className="absolute inset-0" 
-                style={{ 
-                  backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0)`,
-                  backgroundSize: '40px 40px' 
-                }} 
-              />
-
-              <div className="relative z-10 text-center space-y-8 px-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className="space-y-2"
-                >
-                  <p className="font-ui text-[12px] md:text-[14px] font-bold uppercase tracking-[0.6em] text-accent">Shalom Hills Presents</p>
-                  <h1 className="text-[14vw] md:text-[11vw] font-display uppercase tracking-tight leading-[0.8] text-white">
-                    Harmonia <br/> <span className="text-white/10">MUN 2026</span>
-                  </h1>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 1 }}
-                  className="pt-12"
-                >
-                  <button 
-                    onClick={() => setActiveTab('committees')}
-                    className="group relative px-12 py-5 bg-white text-black font-ui text-[11px] font-bold uppercase tracking-[0.3em] overflow-hidden hover:scale-105 active:scale-95 transition-all"
+              <div className="container mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className="space-y-8"
                   >
-                    <span className="relative z-10">Explore Conference</span>
-                    <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                  </button>
-                </motion.div>
-              </div>
+                    <div className="space-y-4">
+                      <p className="font-ui text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em] text-accent">Shalom Group of Schools Presents</p>
+                      <h1 className="text-[12vw] lg:text-[7vw] font-display uppercase tracking-tight leading-[0.9] text-white">
+                        Harmonia <br/>
+                        <span className="text-accent">MUN 2026</span>
+                      </h1>
+                      <p className="font-ui text-lg md:text-xl font-medium tracking-[0.2em] uppercase text-white/60">
+                        Beyond Words. Towards Action.
+                      </p>
+                    </div>
 
-              {/* Decorative side text */}
-              <div className="absolute left-10 bottom-10 hidden lg:block overflow-hidden">
-                <motion.p 
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="font-ui text-[9px] font-bold uppercase tracking-[0.5em] text-white/20 origin-left -rotate-90"
-                >
-                  Beyond Words. Towards Action.
-                </motion.p>
+                    <div className="flex flex-wrap gap-4 pt-4">
+                      <button
+                        onClick={() => setActiveTab('committees')}
+                        className="btn-primary px-10 py-4 text-[11px]"
+                      >
+                        Explore Committees
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('about')}
+                        className="btn-ghost px-10 py-4 text-[11px] border-white/20 text-white hover:border-white"
+                      >
+                        About Conference
+                      </button>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ delay: 0.2, duration: 1 }}
+                    className="relative hidden lg:block"
+                  >
+                    <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative group">
+                      <img
+                        src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000"
+                        alt="Conference Hero"
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent" />
+
+                      {/* Decorative elements */}
+                      <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 blur-3xl rounded-full" />
+                      <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent/10 blur-2xl rounded-full" />
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </section>
 
             {/* QUICK STATS */}
-            <section className="py-24 border-y border-white/5 bg-[#0d0d0d]">
+            <section className="py-24 border-y border-white/5 bg-bg-dark">
               <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
                   {[
@@ -246,10 +257,61 @@ export default function App() {
         const secretariat = members.filter(m => m.category === 'Secretariat');
         const eb = members.filter(m => m.category === 'EB');
         return (
-          <div className="space-y-0">
-             {/* Header */}
-             <section className="relative pt-32 pb-24 flex flex-col items-center text-center">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          <div className="space-y-0 bg-bg">
+             {/* Main About Section */}
+             <section className="py-24 px-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                   <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      className="space-y-8"
+                   >
+                      <div className="space-y-4">
+                         <p className="sec-label">The Conference</p>
+                         <h2 className="text-6xl md:text-7xl font-display uppercase text-white">About <br/> Harmonia MUN</h2>
+                      </div>
+                      <div className="prose prose-invert prose-lg text-white/60 font-sans leading-relaxed">
+                         <p>
+                            Harmonia Model United Nations is a premier diplomatic simulation hosted by Shalom Group of Schools.
+                            Our conference provides a platform for young minds to engage in meaningful dialogue,
+                            tackle global challenges, and develop essential leadership skills.
+                         </p>
+                         <p>
+                            With a legacy of excellence, Chapter 2 brings together delegates from across the region
+                             to collaborate, negotiate, and innovate towards a more harmonious future.
+                         </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
+                         <div>
+                            <h4 className="text-3xl font-display text-accent">300+</h4>
+                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Delegates</p>
+                         </div>
+                         <div>
+                            <h4 className="text-3xl font-display text-accent">12+</h4>
+                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Committees</p>
+                         </div>
+                      </div>
+                   </motion.div>
+                   <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      className="relative"
+                   >
+                      <div className="aspect-[16/10] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative">
+                         <img
+                           src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1000"
+                           alt="Conference"
+                           className="w-full h-full object-cover"
+                         />
+                         <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/60 via-transparent to-transparent" />
+                      </div>
+                   </motion.div>
+                </div>
+             </section>
+
+             {/* Leadership Header */}
+             <section className="relative pt-32 pb-24 flex flex-col items-center text-center border-t border-white/5">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="space-y-4">
                    <div className="flex items-center justify-center gap-4">
                       <div className="h-[1px] w-8 bg-accent/40" />
                       <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Leadership</span>
@@ -358,7 +420,7 @@ export default function App() {
                                 href={committee.bg_guide_url} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="p-2 bg-white/10 hover:bg-accent hover:text-black rounded-lg transition-colors"
+                                className="p-2 bg-white/10 hover:bg-accent hover:text-bg rounded-lg transition-colors"
                                 title="Download Background Guide"
                                 onClick={(e) => e.stopPropagation()}
                               >
@@ -405,7 +467,7 @@ export default function App() {
                  return (
                    <div key={day} className="space-y-12">
                       <div className="relative z-10 flex justify-center">
-                         <div className="px-8 py-3 bg-accent text-black rounded-full font-display text-xl uppercase">{day}</div>
+                         <div className="px-8 py-3 bg-accent text-bg rounded-full font-display text-xl uppercase">{day}</div>
                       </div>
                       <div className="space-y-12">
                          {dayItems.map((item, idx) => (
