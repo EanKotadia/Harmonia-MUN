@@ -114,124 +114,52 @@ export default function App() {
       case 'admin':
         if (!profile) return <LoginForm onSuccess={() => refresh()} onBack={() => setActiveTab('home')} />;
         return <AdminPanel sessions={sessions} schedule={schedule} categories={categories} notices={notices} gallery={gallery} culturalResults={culturalResults} members={members} sponsors={sponsors} profile={profile} settings={settings} refresh={refresh} onBack={() => setActiveTab('home')} />;
-      case 'gallery':
-        return (
-          <div className="min-h-screen pt-24 pb-20 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto space-y-16">
-              <div className="flex flex-col md:flex-row items-end justify-between gap-8">
-                <div className="space-y-4">
-                  <span className="font-ui text-[12px] font-bold uppercase tracking-[0.4em] text-accent">Visual History</span>
-                  <h1 className="font-display text-7xl md:text-8xl tracking-tighter uppercase leading-[0.85]">
-                    Moments in <br/> <span className="text-muted/20">Motion</span>
-                  </h1>
-                </div>
-                <p className="font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-muted max-w-xs text-right leading-relaxed">
-                  A curated collection of memories from previous editions and the current conference.
-                </p>
-              </div>
-
-              {gallery.length === 0 ? (
-                <div className="h-[60vh] rounded-[3rem] border border-white/5 bg-white/2 flex flex-col items-center justify-center gap-6 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none" />
-                  <ImageIcon size={64} className="text-white/10" />
-                  <p className="font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-muted">Media will be uploaded soon</p>
-                </div>
-              ) : (
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                  {gallery.map((item) => (
-                    <div key={item.id} className="relative group overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 break-inside-avoid shadow-2xl">
-                       {item.type === 'video' ? (
-                          <div className="relative aspect-video">
-                             <iframe 
-                               src={getEmbedUrl(item.url)} 
-                               className="w-full h-full"
-                               allowFullScreen
-                             />
-                          </div>
-                       ) : (
-                         <img 
-                           src={item.url} 
-                           alt={item.title}
-                           className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                           referrerPolicy="no-referrer"
-                         />
-                       )}
-                       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
-                         <span className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent mb-2">{item.type}</span>
-                         <h3 className="font-display text-2xl text-white uppercase tracking-wider">{item.title}</h3>
-                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        );
       case 'events':
-        return <EventsSection categories={categories} matches={sessions} setActiveTab={setActiveTab} />;
+        return <EventsSection categories={categories} matches={sessions} members={members} setActiveTab={setActiveTab} />;
       case 'home':
         return (
           <div className="space-y-0">
             {/* HERO SECTION */}
-            <section className="relative min-h-[90vh] lg:h-screen flex items-center overflow-hidden bg-bg" id="home">
-              <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-dark to-bg opacity-50" />
-              
-              <div className="container mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="space-y-8"
+            <section className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-6 bg-bg overflow-hidden" id="home">
+              <div className="relative z-10 max-w-4xl space-y-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-6"
+                >
+                  <p className="font-ui text-[14px] md:text-[16px] font-bold uppercase tracking-[0.6em] text-accent">Shalom Group of Schools Presents</p>
+                  <h1 className="text-[14vw] md:text-[9vw] font-display uppercase tracking-tight leading-[0.85] text-white">
+                    Harmonia <br/> <span className="text-accent">MUN 2026</span>
+                  </h1>
+                  <p className="font-ui text-lg md:text-2xl font-medium tracking-[0.3em] uppercase text-white/60 pt-4">
+                    Beyond Words. Towards Action.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="flex flex-wrap items-center justify-center gap-6"
+                >
+                  <button
+                    onClick={() => setActiveTab('committees')}
+                    className="btn-primary px-12 py-5 text-[12px] shadow-2xl shadow-accent/20"
                   >
-                    <div className="space-y-4">
-                      <p className="font-ui text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em] text-accent">Shalom Group of Schools Presents</p>
-                      <h1 className="text-[12vw] lg:text-[7vw] font-display uppercase tracking-tight leading-[0.9] text-white">
-                        Harmonia <br/>
-                        <span className="text-accent">MUN 2026</span>
-                      </h1>
-                      <p className="font-ui text-lg md:text-xl font-medium tracking-[0.2em] uppercase text-white/60">
-                        Beyond Words. Towards Action.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 pt-4">
-                      <button
-                        onClick={() => setActiveTab('committees')}
-                        className="btn-primary px-10 py-4 text-[11px]"
-                      >
-                        Explore Committees
-                      </button>
-                      <button
-                        onClick={() => setActiveTab('about')}
-                        className="btn-ghost px-10 py-4 text-[11px] border-white/20 text-white hover:border-white"
-                      >
-                        About Conference
-                      </button>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9, x: 50 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    transition={{ delay: 0.2, duration: 1 }}
-                    className="relative hidden lg:block"
+                    Explore Committees
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('about')}
+                    className="btn-ghost px-12 py-5 text-[12px] border-white/20 text-white hover:border-white hover:bg-white/5"
                   >
-                    <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative group">
-                      <img
-                        src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000"
-                        alt="Conference Hero"
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent" />
-
-                      {/* Decorative elements */}
-                      <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 blur-3xl rounded-full" />
-                      <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent/10 blur-2xl rounded-full" />
-                    </div>
-                  </motion.div>
-                </div>
+                    About Conference
+                  </button>
+                </motion.div>
               </div>
+
+              {/* Minimal decorative element */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 blur-[120px] rounded-full -z-0 pointer-events-none" />
             </section>
 
             {/* QUICK STATS */}
@@ -322,25 +250,13 @@ export default function App() {
                 </div>
              </section>
 
-             {/* Leadership Header */}
-             <section className="relative pt-32 pb-24 flex flex-col items-center text-center border-t border-white/5">
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="space-y-4">
-                   <div className="flex items-center justify-center gap-4">
-                      <div className="h-[1px] w-8 bg-accent/40" />
-                      <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Leadership</span>
-                      <div className="h-[1px] w-8 bg-accent/40" />
-                   </div>
-                   <h1 className="text-7xl md:text-8xl font-display uppercase tracking-tight text-white">Voices of Guidance</h1>
-                </motion.div>
-             </section>
-
              {/* Secretariat */}
              <section className="py-24 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-6">
                    <div className="text-center mb-16">
                       <div className="flex items-center justify-center gap-4 mb-4">
                          <div className="h-[1px] w-8 bg-accent/40" />
-                         <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">The Team</span>
+                         <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Leadership</span>
                          <div className="h-[1px] w-8 bg-accent/40" />
                       </div>
                       <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Secretariat</h2>
@@ -368,27 +284,58 @@ export default function App() {
                 </div>
              </section>
 
-             {/* EB Members */}
-             <section className="py-24 border-t border-white/5 bg-white/[0.02]">
+             {/* Gallery Section - Merged into About */}
+             <section className="py-24 border-t border-white/5 bg-white/[0.01]">
                 <div className="max-w-7xl mx-auto px-6">
                    <div className="text-center mb-16">
-                      <h2 className="text-6xl font-display uppercase text-white">Executive Board</h2>
+                      <p className="sec-label">Visuals</p>
+                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Gallery</h2>
                    </div>
-                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {eb.map((m, i) => (
-                        <motion.div 
-                          key={m.id} 
-                          initial={{ opacity: 0 }} 
-                          animate={{ opacity: 1 }} 
-                          transition={{ delay: i * 0.05 }}
-                          className="p-6 border border-white/5 rounded-[2rem] space-y-4 hover:bg-white/5 transition-all text-center"
-                        >
-                           <img src={m.image_url || ''} className="w-24 h-24 rounded-full mx-auto object-cover grayscale opacity-50" />
-                           <div>
-                              <h4 className="text-lg font-display uppercase text-white">{m.name}</h4>
-                              <p className="text-[9px] font-bold text-accent uppercase tracking-widest">{m.role}</p>
+                   {gallery.length === 0 ? (
+                      <div className="h-60 rounded-3xl border border-white/5 flex items-center justify-center text-muted">
+                        No media available
+                      </div>
+                   ) : (
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                      {gallery.slice(0, 6).map((item) => (
+                        <div key={item.id} className="relative group overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 break-inside-avoid shadow-2xl">
+                           {item.type === 'video' ? (
+                             <div className="aspect-video bg-bg-dark flex items-center justify-center">
+                               <ImageIcon size={48} className="text-white/10" />
+                             </div>
+                           ) : (
+                             <img
+                               src={item.url}
+                               alt={item.title}
+                               className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                             />
+                           )}
+                           <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
+                             <h3 className="font-display text-2xl text-white uppercase tracking-wider">{item.title}</h3>
                            </div>
-                        </motion.div>
+                        </div>
+                      ))}
+                    </div>
+                   )}
+                </div>
+             </section>
+
+             {/* Sponsors Section - Merged into About */}
+             <section className="py-24 border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-6">
+                   <div className="text-center mb-16">
+                      <p className="sec-label">Partners</p>
+                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Our Sponsors</h2>
+                   </div>
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-12 opacity-40">
+                      {sponsors.length === 0 ? [1,2,3,4].map(i => (
+                        <div key={i} className="h-24 flex items-center justify-center border border-dashed border-white/20 rounded-2xl">
+                           <span className="text-[10px] font-bold uppercase">Partner {i}</span>
+                        </div>
+                      )) : sponsors.map(s => (
+                        <div key={s.id} className="flex items-center justify-center">
+                           <img src={s.logo_url || ''} alt={s.name} className="h-16 object-contain grayscale" />
+                        </div>
                       ))}
                    </div>
                 </div>
@@ -561,37 +508,6 @@ export default function App() {
             </div>
           </div>
         );
-
-      case 'sponsors':
-        return (
-          <div className="max-w-7xl mx-auto px-6 py-32">
-            <div className="text-center mb-24">
-              <div className="flex items-center justify-center gap-4 mb-4">
-                 <div className="h-[1px] w-8 bg-accent/40" />
-                 <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Partners</span>
-                 <div className="h-[1px] w-8 bg-accent/40" />
-              </div>
-              <h1 className="text-7xl md:text-9xl font-display uppercase text-white">Our Sponsors</h1>
-              <p className="text-muted text-xl mt-6">Gratitude to our partners who make Harmonia MUN Chapter 2 possible.</p>
-            </div>
-
-            <div className="bg-white/5 border border-white/5 rounded-[4rem] p-12 lg:p-24 min-h-[400px] flex items-center justify-center">
-               <div className="space-y-6 text-center">
-                 <p className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-muted">Sponsorship opportunities available for chapter 2</p>
-                 <div className="w-full h-[1px] bg-white/5" />
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-12 opacity-20">
-                    {/* Placeholder logos */}
-                    {[1,2,3,4].map(i => (
-                      <div key={i} className="h-24 flex items-center justify-center border border-dashed border-white/20 rounded-2xl">
-                         <span className="text-[10px] font-bold uppercase">Partner {i}</span>
-                      </div>
-                    ))}
-                 </div>
-               </div>
-            </div>
-          </div>
-        );
-
 
       case 'notices':
         const filteredNotices = notices.filter(n => noticePriority === 'all' || n.priority === noticePriority);

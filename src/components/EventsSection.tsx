@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Committee, Session } from '../types';
-import { Trophy, Music, Palette, Film, Theater, Swords, Target, Users, Clock, Calendar, Info, ChevronRight, X, ArrowRight, FileText } from 'lucide-react';
+import { Committee, Session, Member } from '../types';
+import { Info, X, ArrowRight, FileText, Users } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface EventsSectionProps {
   categories: Committee[];
   matches: Session[];
+  members: Member[];
   setActiveTab: (tab: string) => void;
 }
 
-export default function EventsSection({ categories, matches, setActiveTab }: EventsSectionProps) {
+export default function EventsSection({ categories, matches, members, setActiveTab }: EventsSectionProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const expandedCategory = categories.find(c => c.id === expandedId);
-  const expandedSessions = expandedId ? matches.filter(m => m.committee_id === expandedId) : [];
+  const committeeEB = members.filter(m => m.committee_id === expandedId && m.category === 'EB');
 
   const generalGuidelines = [
     "Formal Western Attire or National Dress is mandatory for all conference sessions.",
@@ -26,8 +27,6 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
   ];
 
   const renderEventCard = (cat: Committee) => {
-    const catSessions = matches.filter(m => m.committee_id === cat.id);
-
     return (
       <motion.div
         key={cat.id}
@@ -56,8 +55,8 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
         </div>
 
         <div className="mt-auto flex items-center justify-between text-accent font-ui text-[10px] font-bold uppercase tracking-widest group-hover:gap-2 transition-all">
-          View Details & Background Guide
-           {cat.bg_guide_url && <span className="ml-2 px-2 py-0.5 bg-accent/20 border border-accent/30 rounded text-[8px]">BG GUIDE</span>} <ArrowRight size={14} />
+          Explore Committee Details
+          <ArrowRight size={14} />
         </div>
       </motion.div>
     );
@@ -87,9 +86,9 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
                 <X size={24} />
               </button>
 
-              <div className="overflow-y-auto p-8 md:p-16">
+              <div className="overflow-y-auto p-8 md:p-16 space-y-12">
                 <div className="flex flex-col md:flex-row gap-12 items-start">
-                  <div className="flex-1 space-y-12">
+                  <div className="flex-1 space-y-12 w-full">
                     <div className="flex items-center gap-8">
                       <motion.div layoutId={`icon-${expandedId}`} className="w-24 h-24 bg-white/5 rounded-[32px] flex items-center justify-center text-6xl overflow-hidden">
                         {expandedCategory.icon || '🛡️'}
@@ -104,36 +103,65 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
                       </div>
                     </div>
 
-                    <div className="space-y-8">
-                      <div>
-                        <h4 className="text-2xl font-display uppercase tracking-widest mb-6 flex items-center gap-3">
-                          <Info className="text-accent" />
-                          About the Committee
-                        </h4>
-                        <div className="bg-white/5 border border-border rounded-3xl p-8 md:p-10">
-                          <p className="text-lg text-text/80 leading-relaxed whitespace-pre-line">
-                            {expandedCategory.description || 'Information for this committee will be updated soon.'}
-                          </p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                      <div className="space-y-8">
+                        <div>
+                          <h4 className="text-xl font-display uppercase tracking-widest mb-6 flex items-center gap-3">
+                            <Info className="text-accent" size={20} />
+                            About the Committee
+                          </h4>
+                          <div className="bg-white/5 border border-border rounded-3xl p-8">
+                            <p className="text-text/70 leading-relaxed whitespace-pre-line">
+                              {expandedCategory.description || 'Information for this committee will be updated soon.'}
+                            </p>
+                          </div>
                         </div>
+
+                        {expandedCategory.bg_guide_url && (
+                          <div className="pt-4">
+                             <h4 className="text-xl font-display uppercase tracking-widest mb-6 flex items-center gap-3">
+                                <FileText className="text-accent" size={20} />
+                                Resources
+                             </h4>
+                             <a
+                                href={expandedCategory.bg_guide_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-bg font-ui text-[10px] font-bold uppercase tracking-widest rounded-xl hover:scale-105 transition-all shadow-xl shadow-accent/20"
+                             >
+                                <FileText size={16} />
+                                Background Guide (PDF)
+                             </a>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-8">
+                         <h4 className="text-xl font-display uppercase tracking-widest mb-6 flex items-center gap-3">
+                            <Users className="text-accent" size={20} />
+                            Executive Board
+                         </h4>
+                         <div className="space-y-4">
+                            {committeeEB.length > 0 ? committeeEB.map(member => (
+                               <div key={member.id} className="flex items-center gap-6 p-6 bg-white/5 border border-white/5 rounded-2xl">
+                                  <div className="w-14 h-14 rounded-xl overflow-hidden bg-bg-dark border border-white/10 shrink-0">
+                                     <img src={member.image_url || ''} alt={member.name} className="w-full h-full object-cover" />
+                                  </div>
+                                  <div>
+                                     <p className="font-display text-xl text-white uppercase tracking-wider">{member.name}</p>
+                                     <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-accent">{member.role}</p>
+                                  </div>
+                               </div>
+                            )) : (
+                               <div className="p-8 border border-dashed border-white/10 rounded-2xl text-center">
+                                  <p className="text-[10px] font-bold uppercase tracking-widest text-muted">EB Members to be announced</p>
+                               </div>
+                            )}
+                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {expandedCategory.bg_guide_url && (
-                  <div className="mt-12">
-                    <a
-                      href={expandedCategory.bg_guide_url}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-4 bg-accent text-bg font-ui text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center gap-3 hover:bg-accent/90 transition-all shadow-xl shadow-accent/20"
-                    >
-                      <FileText size={18} />
-                      Download Background Guide
-                    </a>
-                  </div>
-                )}
               </div>
             </motion.div>
           </div>
@@ -145,7 +173,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
         <div className="mb-16">
           <p className="sec-label">Rules & Instructions</p>
           <h2 className="text-6xl md:text-8xl">General Guidelines</h2>
-          <p className="text-muted mt-4 text-lg">Essential information for all Harmonia MUN 2026 participants.</p>
+          <p className="text-muted mt-4 text-lg">Essential information for all participants.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white/5 border border-border p-10 rounded-3xl">
@@ -176,7 +204,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
           <div className="mb-16">
             <p className="sec-label">Committee Hall</p>
             <h2 className="text-6xl md:text-8xl tracking-tight">The Committees</h2>
-            <p className="text-muted mt-4 text-lg max-w-2xl">From the Security Council to Human Rights, explore the bodies shaping international discourse at Harmonia MUN 2026.</p>
+            <p className="text-muted mt-4 text-lg max-w-2xl">From the Security Council to Human Rights, explore the bodies shaping international discourse.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.map(renderEventCard)}

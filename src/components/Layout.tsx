@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Bell } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface LayoutProps {
@@ -25,8 +25,6 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
     { id: 'schedule', label: 'Schedule' },
     { id: 'rankings', label: 'Rankings' },
     { id: 'notices', label: 'Notices' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'sponsors', label: 'Sponsors' },
   ];
 
   return (
@@ -58,7 +56,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
           </div>
 
           {/* Desktop Nav */}
-          <ul className="hidden xl:flex items-center gap-10 list-none">
+          <ul className="hidden lg:flex items-center gap-10 list-none">
             {navItems.map((item, idx) => (
               <li key={idx}>
                 <button
@@ -86,7 +84,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                Admin
             </button>
             <button 
-              className="xl:hidden p-2 text-white/60 hover:text-white transition-colors"
+              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -101,7 +99,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="xl:hidden fixed inset-0 top-0 bg-bg-dark p-8 flex flex-col z-[150]"
+                className="lg:hidden fixed inset-0 top-0 bg-bg-dark p-8 flex flex-col z-[150]"
               >
                 <div className="flex items-center justify-between h-[80px] mb-12">
                    <div className="flex items-center gap-4">

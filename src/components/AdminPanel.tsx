@@ -34,6 +34,7 @@ interface CategoryEditorProps {
   onRefresh: () => void;
   handleSupabaseError: (err: any, context: string) => void;
   culturalResults: Ranking[];
+  members: Member[];
 }
 
 const CategoryEditor = ({
@@ -41,6 +42,7 @@ const CategoryEditor = ({
   onRefresh,
   handleSupabaseError,
   culturalResults,
+  members,
 }: CategoryEditorProps) => {
   const [loading, setLoading] = useState(false);
   const catResults = culturalResults.filter(r => r.committee_id === cat.id);
@@ -149,17 +151,67 @@ const CategoryEditor = ({
         </button>
       </div>
 
-      <div className="space-y-4">
-        <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
-          Description
-          <div className="h-[1px] flex-1 bg-white/5" />
-        </span>
-        <textarea
-          value={cat.description || ''}
-          onChange={(e) => updateCategory({ description: e.target.value })}
-          className="w-full bg-white/5 border border-white/5 rounded-[1.5rem] p-5 text-xs text-muted font-medium outline-none focus:border-accent/50 transition-all min-h-[100px] resize-none"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-4">
+          <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
+            Description
+            <div className="h-[1px] flex-1 bg-white/5" />
+          </span>
+          <textarea
+            value={cat.description || ''}
+            onChange={(e) => updateCategory({ description: e.target.value })}
+            className="w-full bg-white/5 border border-white/5 rounded-[1.5rem] p-5 text-xs text-muted font-medium outline-none focus:border-accent/50 transition-all min-h-[120px] resize-none"
+            placeholder="Committee description..."
+          />
+        </div>
+        <div className="space-y-4">
+          <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-3">
+            Background Guide Link (PDF)
+            <div className="h-[1px] flex-1 bg-white/5" />
+          </span>
+          <input
+            type="text"
+            value={cat.bg_guide_url || ''}
+            onChange={(e) => updateCategory({ bg_guide_url: e.target.value })}
+            className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-accent font-medium outline-none focus:border-accent/50 transition-all"
+            placeholder="https://.../guide.pdf"
+          />
+          <div className="p-4 bg-accent/5 border border-accent/10 rounded-2xl">
+             <p className="text-[10px] text-accent/60 uppercase font-bold tracking-widest leading-relaxed">
+                Ensure the link is public and leads directly to the PDF file.
+             </p>
+          </div>
+        </div>
       </div>
+
+
+            <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <span className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-accent flex items-center gap-3 w-full">
+            Executive Board (Assigned)
+            <div className="h-[1px] flex-1 bg-accent/10" />
+          </span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+           {members.filter(m => m.committee_id === cat.id && m.category === 'EB').map(eb => (
+              <div key={eb.id} className="flex items-center gap-4 p-4 bg-white/5 border border-white/5 rounded-2xl group/eb">
+                 <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/5">
+                    <img src={eb.image_url || ''} className="w-full h-full object-cover" alt={eb.name} />
+                 </div>
+                 <div>
+                    <p className="text-xs font-bold text-white uppercase tracking-tight">{eb.name}</p>
+                    <p className="text-[9px] text-accent font-bold uppercase tracking-widest">{eb.role}</p>
+                 </div>
+              </div>
+           ))}
+           {members.filter(m => m.committee_id === cat.id && m.category === 'EB').length === 0 && (
+              <div className="col-span-full py-6 border border-dashed border-white/10 rounded-2xl text-center">
+                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted">No EB members assigned in the Members tab</p>
+              </div>
+           )}
+        </div>
+      </div>
+
 
       <div className="space-y-6">
         <div className="flex items-center justify-between">
@@ -224,6 +276,7 @@ interface AdminPanelProps {
   notices: Notice[];
   gallery: GalleryItem[];
   culturalResults: Ranking[];
+  members: Member[];
   members: Member[];
   sponsors: Sponsor[];
   profile: Profile | null;
@@ -595,7 +648,7 @@ export default function AdminPanel({
                   <CategoryEditor
                     key={cat.id}
                     cat={cat}
-                    culturalResults={culturalResults}
+                    culturalResults={culturalResults} members={members}
                     onRefresh={refresh}
                     handleSupabaseError={handleSupabaseError}
                   />
