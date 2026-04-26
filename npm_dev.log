@@ -17,3 +17,15 @@
  GET /gallery 200 in 1288ms (next.js: 851ms, proxy.ts: 8ms, application-code: 429ms)
  GET /notices 200 in 1693ms (next.js: 1221ms, proxy.ts: 14ms, application-code: 459ms)
  GET /register 200 in 3.0s (next.js: 2.5s, proxy.ts: 14ms, application-code: 474ms)
+✓ Compiled in 681ms
+✓ Compiled in 190ms
+✓ Compiled in 465ms
+ GET / 200 in 2.6s (next.js: 615ms, proxy.ts: 1581ms, application-code: 385ms)
+ GET / 200 in 90ms (next.js: 5ms, proxy.ts: 9ms, application-code: 75ms)
+ GET /houses 200 in 1441ms (next.js: 113ms, proxy.ts: 30ms, application-code: 1298ms)
+ GET /categories 200 in 455ms (next.js: 83ms, proxy.ts: 11ms, application-code: 361ms)
+ GET / 200 in 82ms (next.js: 5ms, proxy.ts: 9ms, application-code: 68ms)
+ GET / 200 in 77ms (next.js: 4ms, proxy.ts: 6ms, application-code: 67ms)
+ GET /houses 200 in 1273ms (next.js: 5ms, proxy.ts: 12ms, application-code: 1256ms)
+ GET /categories 200 in 395ms (next.js: 7ms, proxy.ts: 7ms, application-code: 381ms)
+ GET / 200 in 99ms (next.js: 7ms, proxy.ts: 34ms, application-code: 58ms)

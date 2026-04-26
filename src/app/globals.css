@@ -6,16 +6,15 @@
 }
 
 :root {
-  --background: #0a0f1d;
-  --foreground: #f8fafc;
+  --background: #050a18;
+  --foreground: #ffffff;
   --primary: #cba35c;
-  --secondary: #1e293b;
-  --accent: #334155;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: var(--font-sans);
 }
 
 .text-gold {
@@ -26,8 +25,19 @@ body {
   background-color: #cba35c;
 }
 
-.glass-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(10px);
+.glass-pill {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-title {
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+}
+
+::selection {
+  background: rgba(203, 163, 92, 0.3);
+  color: white;
 }
