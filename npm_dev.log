@@ -35,3 +35,12 @@
  GET /houses 200 in 1612ms (next.js: 199ms, proxy.ts: 22ms, application-code: 1391ms)
  GET /categories 200 in 507ms (next.js: 78ms, proxy.ts: 12ms, application-code: 417ms)
  GET / 200 in 52ms (next.js: 7ms, proxy.ts: 9ms, application-code: 36ms)
+✓ Compiled in 4.1s
+✓ Compiled in 430ms
+✓ Compiled in 332ms
+ GET / 200 in 889ms (next.js: 312ms, proxy.ts: 317ms, application-code: 259ms)
+ GET /categories 200 in 1690ms (next.js: 118ms, proxy.ts: 13ms, application-code: 1560ms)
+ GET /results 200 in 928ms (next.js: 58ms, proxy.ts: 7ms, application-code: 863ms)
+ GET /schedule 200 in 452ms (next.js: 58ms, proxy.ts: 21ms, application-code: 373ms)
+○ Compiling /admin/login ...
+ GET /admin/login 200 in 5.9s (next.js: 5.7s, proxy.ts: 7ms, application-code: 210ms)
