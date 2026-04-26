@@ -304,7 +304,7 @@ export default function AdminPanel({
   return (
     <div className="min-h-screen bg-bg-dark flex flex-col lg:flex-row relative">
       {/* Sidebar Navigation */}
-      <aside className="w-full lg:w-72 bg-[#0a0a0a] border-r border-white/5 flex flex-col flex-shrink-0 z-50">
+      <aside className="w-full lg:w-72 bg-bg-dark border-r border-white/5 flex flex-col flex-shrink-0 z-50">
         <div className="p-8 border-b border-white/5">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 bg-accent rounded-1.5xl flex items-center justify-center text-black shadow-lg shadow-accent/20">
@@ -362,8 +362,8 @@ export default function AdminPanel({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-[#0d0d0d]">
-        <header className="sticky top-0 z-40 bg-[#0d0d0d]/80 backdrop-blur-xl border-b border-white/5 h-32 flex items-center px-8 lg:px-12 justify-between">
+      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-bg">
+        <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-xl border-b border-white/5 h-32 flex items-center px-8 lg:px-12 justify-between">
           <div className="flex items-center gap-6">
             <div className="w-14 h-14 bg-white/5 rounded-[1.5rem] flex items-center justify-center text-accent border border-white/5 shadow-2xl">
               {activeTab === 'sessions' && <Activity size={24} />}

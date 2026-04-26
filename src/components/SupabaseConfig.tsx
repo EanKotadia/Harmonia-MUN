@@ -17,7 +17,7 @@ export default function SupabaseConfig({ onConfigured }: SupabaseConfigProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#050b1a] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-bg-dark flex items-center justify-center p-6">
       <div className="max-w-md w-full card-glass p-10 border-accent/20">
         <div className="flex justify-center mb-8">
           <div className="w-20 h-20 bg-accent/10 rounded-3xl flex items-center justify-center text-accent border border-accent/20">
@@ -26,7 +26,7 @@ export default function SupabaseConfig({ onConfigured }: SupabaseConfigProps) {
         </div>
 
         <h2 className="text-3xl font-display text-center text-white mb-2 uppercase tracking-tight">Database Config</h2>
-        <p className="text-white/40 text-center text-sm mb-10">Connect your Harmonia MUN Supabase instance.</p>
+        <p className="text-white/40 text-center text-sm mb-10">Connect your Shalom Group of Schools Supabase instance.</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
