@@ -6,18 +6,18 @@
   --font-display: "Bebas Neue", sans-serif;
   --font-ui: "Rajdhani", sans-serif;
 
-  --color-bg: #11274A;
-  --color-bg2: #162e54;
-  --color-bg3: #1c3660;
-  --color-bg-dark: #0a1931;
-  --color-dark: #050b1a;
-  --color-surface: rgba(255, 255, 255, 0.045);
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-text: #f0f0ff;
-  --color-muted: rgba(240, 240, 255, 0.52);
-  --color-subtle: rgba(240, 240, 255, 0.25);
+  --color-bg: #003262;
+  --color-bg2: #004B91;
+  --color-bg3: #005C96;
+  --color-bg-dark: #001E3A;
+  --color-dark: #001E3A;
+  --color-surface: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.15);
+  --color-text: #FFFFFF;
+  --color-muted: rgba(255, 255, 255, 0.7);
+  --color-subtle: rgba(255, 255, 255, 0.4);
   
-  --color-accent: #BC8A2C;
+  --color-accent: #007CBE;
   --color-success: #2DC653;
   --color-danger: #E63946;
   --color-warn: #F5C518;
@@ -31,9 +31,7 @@
   body::before {
     content: '';
     @apply fixed inset-0 z-0 pointer-events-none;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px), 
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-    background-size: 56px 56px;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
   }
 
   h1, h2, h3, h4 {
@@ -61,11 +59,11 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-[7px] px-[26px] py-[11px] bg-accent text-bg font-ui text-[12px] font-bold uppercase tracking-[2px] transition-all hover:bg-[#ffd84d] active:scale-95 cursor-pointer rounded-xl;
+    @apply inline-flex items-center gap-[7px] px-[26px] py-[11px] bg-white text-bg font-ui text-[12px] font-bold uppercase tracking-[2px] transition-all hover:bg-white/90 active:scale-95 cursor-pointer rounded-xl;
   }
   
   .btn-ghost {
-    @apply inline-flex items-center gap-[7px] px-[26px] py-[11px] border border-border bg-transparent text-text font-ui text-[12px] font-bold uppercase tracking-[2px] transition-all hover:border-white/30 hover:bg-white/5 active:scale-95 cursor-pointer rounded-xl;
+    @apply inline-flex items-center gap-[7px] px-[26px] py-[11px] border border-white text-white font-ui text-[12px] font-bold uppercase tracking-[2px] transition-all hover:bg-white/10 active:scale-95 cursor-pointer rounded-xl;
   }
 
   .btn-danger {
@@ -73,11 +71,11 @@
   }
 
   .sec-label {
-    @apply flex items-center gap-[10px] font-ui text-[11px] font-bold uppercase tracking-[4px] text-accent mb-[12px];
+    @apply flex items-center gap-[10px] font-ui text-[11px] font-bold uppercase tracking-[4px] text-white/60 mb-[12px];
   }
   .sec-label::before {
     content: '';
-    @apply w-[24px] h-[1px] bg-accent;
+    @apply w-[24px] h-[1px] bg-white/40;
   }
 
   .card-glass {
@@ -92,23 +90,23 @@
   .badge-completed { @apply bg-success/15 text-success; }
 
   .form-input, .form-select {
-    @apply w-full px-[13px] py-[10px] bg-bg2 border border-border text-text font-sans text-[14px] outline-none transition-all focus:border-accent focus:ring-3 focus:ring-accent/15 rounded-xl;
+    @apply w-full px-[13px] py-[10px] bg-bg2 border border-border text-text font-sans text-[14px] outline-none transition-all focus:border-white/50 focus:ring-3 focus:ring-white/5 rounded-xl;
   }
   .form-input::placeholder { @apply text-subtle; }
   .form-select option { @apply bg-bg3; }
 
   .hero-eyebrow {
-    @apply inline-block font-ui text-[11px] font-bold tracking-[3px] uppercase text-accent border border-accent/30 bg-accent/10 px-[20px] py-[6px] mb-[20px] rounded-full;
+    @apply inline-block font-ui text-[11px] font-bold tracking-[3px] uppercase text-white border border-white/30 bg-white/10 px-[20px] py-[6px] mb-[20px] rounded-full;
   }
   .hero-title {
-    @apply font-display text-[clamp(60px,9vw,120px)] leading-[0.95] tracking-[3px] bg-gradient-to-b from-white to-white/65 bg-clip-text text-transparent;
+    @apply font-display text-[clamp(60px,9vw,120px)] leading-[0.95] tracking-[3px] text-white;
   }
   .hero-sub {
-    @apply font-ui text-[16px] font-semibold tracking-[4px] uppercase text-muted mt-[16px];
+    @apply font-ui text-[16px] font-semibold tracking-[4px] uppercase text-white/80 mt-[16px];
   }
 
   .nav-logo {
-    @apply font-display text-[24px] tracking-[3px] no-underline bg-gradient-to-br from-white via-white to-accent bg-clip-text text-transparent;
+    @apply font-display text-[24px] tracking-[3px] no-underline text-white;
   }
   .nav-live {
     @apply font-ui text-[11px] font-bold tracking-[1px] text-danger animate-pulse max-w-[220px] overflow-hidden text-ellipsis whitespace-nowrap;
@@ -139,14 +137,4 @@
   .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
   }
-}
-
-@keyframes orbdrift {
-  from { transform: translate(0, 0); }
-  to { transform: translate(40px, -40px); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
 }

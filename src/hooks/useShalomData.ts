@@ -38,7 +38,7 @@ const withRetry = async <T>(fn: () => Promise<T>, retries = 3): Promise<T> => {
   }
 };
 
-export function useHarmoniaMUNData() {
+export function useShalomData() {
   const [sessions, setSessions] = useState<Session[]>(globalCache.sessions || []);
   const [schedule, setSchedule] = useState<ScheduleItem[]>(globalCache.schedule || []);
   const [settings, setSettings] = useState<Record<string, string>>(globalCache.settings || {});

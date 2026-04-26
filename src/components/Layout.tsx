@@ -33,7 +33,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
     <div className="min-h-screen flex flex-col bg-bg text-text selection:bg-accent selection:text-bg">
       <header className="fixed top-0 left-0 right-0 z-[110]">
         {announcement && (
-          <div className="bg-accent text-bg py-2 px-6 text-center font-ui text-[10px] font-bold uppercase tracking-widest relative">
+          <div className="bg-white text-bg py-2 px-6 text-center font-ui text-[10px] font-bold uppercase tracking-widest relative">
             {announcement}
           </div>
         )}
@@ -51,8 +51,8 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                 referrerPolicy="no-referrer"
               />
               <div className="hidden lg:flex flex-col items-start translate-y-[-2px]">
-                 <span className="font-display text-2xl tracking-tighter uppercase text-white leading-none">Harmonia</span>
-                 <span className="font-ui text-[8px] font-bold tracking-[0.4em] uppercase text-accent leading-none">MUN 2026</span>
+                 <span className="font-display text-2xl tracking-tighter uppercase text-white leading-none">Shalom</span>
+                 <span className="font-ui text-[8px] font-bold tracking-[0.4em] uppercase text-white/60 leading-none">Group of Schools</span>
               </div>
             </button>
           </div>
@@ -65,12 +65,12 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                   onClick={() => setActiveTab(item.id)}
                   className={cn(
                     "font-ui text-[11px] font-bold uppercase tracking-[2px] transition-all relative py-2 group",
-                    activeTab === item.id ? "text-accent" : "text-white/40 hover:text-white"
+                    activeTab === item.id ? "text-white" : "text-white/40 hover:text-white"
                   )}
                 >
                   {item.label}
                   <div className={cn(
-                    "absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-accent transition-all duration-300",
+                    "absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-white transition-all duration-300",
                     activeTab === item.id ? "w-full" : "w-0 group-hover:w-full opacity-40"
                   )} />
                 </button>
@@ -81,7 +81,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
           <div className="flex items-center gap-4">
             <button
                onClick={() => setActiveTab('admin')}
-               className="hidden md:flex px-6 py-2 border border-white/10 hover:border-accent/40 rounded-lg font-ui text-[10px] font-bold uppercase tracking-widest text-muted hover:text-accent transition-all"
+               className="hidden md:flex px-6 py-2 border border-white/10 hover:border-white/40 rounded-lg font-ui text-[10px] font-bold uppercase tracking-widest text-muted hover:text-white transition-all"
             >
                Admin
             </button>
@@ -101,7 +101,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="xl:hidden fixed inset-0 top-0 bg-[#0d0d0d] p-8 flex flex-col z-[150]"
+                className="xl:hidden fixed inset-0 top-0 bg-bg p-8 flex flex-col z-[150]"
               >
                 <div className="flex items-center justify-between h-[80px] mb-12">
                    <div className="flex items-center gap-4">
@@ -112,8 +112,8 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                         referrerPolicy="no-referrer"
                       />
                       <div className="flex flex-col">
-                        <span className="font-display text-xl tracking-tighter uppercase text-white leading-none">Harmonia</span>
-                        <span className="font-ui text-[7px] font-bold tracking-[0.4em] uppercase text-accent leading-none">MUN 2026</span>
+                        <span className="font-display text-xl tracking-tighter uppercase text-white leading-none">Shalom</span>
+                        <span className="font-ui text-[7px] font-bold tracking-[0.4em] uppercase text-white/60 leading-none">Group of Schools</span>
                       </div>
                    </div>
                    <button onClick={() => setIsMenuOpen(false)} className="p-2 text-white/60 hover:text-white transition-colors">
@@ -134,7 +134,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                       }}
                       className={cn(
                         "font-display text-6xl text-left tracking-tight uppercase leading-none pb-2 border-b border-white/5",
-                        activeTab === item.id ? "text-accent" : "text-white/30"
+                        activeTab === item.id ? "text-white" : "text-white/30"
                       )}
                     >
                       {item.label}
@@ -148,7 +148,7 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
                       setActiveTab('admin');
                       setIsMenuOpen(false);
                     }}
-                    className="font-ui text-sm font-bold uppercase tracking-[0.4em] text-accent"
+                    className="font-ui text-sm font-bold uppercase tracking-[0.4em] text-white"
                   >
                     Admin Portal
                   </button>
@@ -178,20 +178,20 @@ export default function Layout({ children, activeTab, setActiveTab, title, subti
             className="h-16 md:h-20 object-contain mb-4 opacity-80 hover:opacity-100 transition-opacity"
             referrerPolicy="no-referrer"
           />
-          <div className="font-display text-3xl tracking-[4px] uppercase">
-            {title.split(' ')[0]} <span>{title.split(' ')[1] || ''}</span>
+          <div className="font-display text-3xl tracking-[4px] uppercase text-white">
+            Shalom Group <span>of Schools</span>
           </div>
-          <p className="font-ui text-[11px] font-bold uppercase tracking-[3px] text-muted">
+          <p className="font-ui text-[11px] font-bold uppercase tracking-[3px] text-white/60">
             {subtitle}
           </p>
-          <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted/50 mt-4">
-            {footerText || `© 2026 ${title}. All rights reserved.`}
+          <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-white/40 mt-4">
+            {footerText || `© 2026 Shalom Group of Schools. All rights reserved.`}
           </p>
 
-          <div className="w-full h-px bg-border my-4" />
+          <div className="w-full h-px bg-white/5 my-4" />
 
-          <div className="flex flex-col md:flex-row justify-between w-full gap-4 font-sans text-[12px] text-subtle">
-            <span>© 2026 Shalom Hills International School | Made by Ean Kotadia, Chetanya Singh and Tanush Kansal</span>
+          <div className="flex flex-col md:flex-row justify-between w-full gap-4 font-sans text-[12px] text-white/30">
+            <span>© 2026 Shalom Group of Schools | Made by Ean Kotadia, Chetanya Singh and Tanush Kansal</span>
           </div>
         </div>
       </footer>

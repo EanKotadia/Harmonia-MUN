@@ -18,7 +18,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
 
   const generalGuidelines = [
     "Formal Western Attire or National Dress is mandatory for all conference sessions.",
-    "Delegates must adhere to the Harmonia MUN Code of Conduct at all times.",
+    "Delegates must adhere to the Shalom Group of Schools Code of Conduct at all times.",
     "Position Papers must be submitted at least 48 hours before the first session to be eligible for awards.",
     "Electronic devices are permitted for research but should not impede active participation during moderated caucus.",
     "All resolutions and amendments must be drafted on the official conference portal.",
@@ -44,7 +44,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
           </motion.div>
           <div className="text-right">
             <span className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted block mb-1">
-              MUN Committee
+              School Program
             </span>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
         <div className="mb-16">
           <p className="sec-label">Rules & Instructions</p>
           <h2 className="text-6xl md:text-8xl">General Guidelines</h2>
-          <p className="text-muted mt-4 text-lg">Essential information for all Harmonia MUN 2026 participants.</p>
+          <p className="text-muted mt-4 text-lg">Essential information for all Shalom Group of Schools 2026 participants.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white/5 border border-border p-10 rounded-3xl">
@@ -176,7 +176,7 @@ export default function EventsSection({ categories, matches, setActiveTab }: Eve
           <div className="mb-16">
             <p className="sec-label">Committee Hall</p>
             <h2 className="text-6xl md:text-8xl tracking-tight">The Committees</h2>
-            <p className="text-muted mt-4 text-lg max-w-2xl">From the Security Council to Human Rights, explore the bodies shaping international discourse at Harmonia MUN 2026.</p>
+            <p className="text-muted mt-4 text-lg max-w-2xl">From the Security Council to Human Rights, explore the bodies shaping international discourse at Shalom Group of Schools 2026.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.map(renderEventCard)}
