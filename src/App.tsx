@@ -9,7 +9,7 @@ import EventsSection from './components/EventsSection';
 import { useHarmoniaMUNData } from './hooks/useHarmoniaMUNData';
 import { Session } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Trophy, Activity, Calendar, Shield, Loader2, AlertCircle, ChevronRight, Play, Image as ImageIcon, Video, ExternalLink, Bell, Info, FileText, Filter, ChevronDown, ChevronUp, Clock, Layers, Users } from 'lucide-react';
+import { Trophy, Activity, Calendar, Shield, Loader2, AlertCircle, ChevronRight, Play, Image as ImageIcon, Video, ExternalLink, Bell, Info, FileText, Filter, ChevronDown, ChevronUp, Clock, Layers, Users, ArrowRight, Target } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { cn } from './lib/utils';
 

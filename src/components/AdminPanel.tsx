@@ -288,7 +288,6 @@ interface AdminPanelProps {
   gallery: GalleryItem[];
   culturalResults: Ranking[];
   members: Member[];
-  members: Member[];
   sponsors: Sponsor[];
   profile: Profile | null;
   settings: Record<string, string>;

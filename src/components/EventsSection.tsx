@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Committee, Session, Member } from '../types';
-import { Info, X, ArrowRight, FileText, Users } from 'lucide-react';
+import { Info, X, ArrowRight, FileText, Users, Layers } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface EventsSectionProps {
