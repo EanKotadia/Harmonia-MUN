@@ -356,7 +356,7 @@ export default function App() {
             </section>
 
             {/* VOICES OF LEADERSHIP */}
-            <section className="py-24 bg-bg-dark border-b border-white/5">
+            <section className="py-24 bg-bg border-b border-white/5">
               <div className="max-w-7xl mx-auto px-6">
                 <div className="mb-20 text-center">
                    <p className="sec-label justify-center">Messages</p>
@@ -398,7 +398,7 @@ export default function App() {
             </section>
 
             {/* COMMITTEE SHOWCASE */}
-            <section className="py-24 bg-bg-dark border-b border-white/5">
+            <section className="py-24 bg-bg border-b border-white/5">
               <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                   <div className="space-y-4">
@@ -441,7 +441,7 @@ export default function App() {
             </section>
 
             {/* TIMELINE PREVIEW */}
-            <section className="py-24 bg-bg-dark border-b border-white/5">
+            <section className="py-24 bg-bg border-b border-white/5">
               <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                   <div className="space-y-4">
@@ -476,7 +476,7 @@ export default function App() {
             </section>
 
             {/* GALLERY HIGHLIGHTS */}
-            <section className="py-24 bg-bg-dark border-b border-white/5">
+            <section className="py-24 bg-bg border-b border-white/5">
                <div className="max-w-7xl mx-auto px-6">
                   <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                     <div className="space-y-4">
@@ -530,6 +530,13 @@ export default function App() {
 
       case 'about':
         const secretariat = members.filter(m => m.category === 'Secretariat');
+        const conferencePillars = [
+           { title: 'Diplomacy', desc: 'Fostering international cooperation and peaceful resolution of conflicts.', icon: Shield },
+           { title: 'Leadership', desc: 'Empowering students to lead with integrity and vision.', icon: Trophy },
+           { title: 'Research', desc: 'Encouraging deep dive into global issues and data-driven solutions.', icon: Info },
+           { title: 'Collaboration', desc: 'Working together across boundaries to achieve common goals.', icon: Users }
+        ];
+
         return (
           <div className="space-y-0 bg-bg">
              {/* Impactful Intro Section */}
@@ -575,32 +582,114 @@ export default function App() {
                 </div>
              </section>
 
-             {/* Premium Secretariat Section */}
-             <section className="py-32 border-t border-white/5 bg-bg-dark">
+             {/* Mission & Vision Section */}
+             <section className="py-32 border-t border-white/5 bg-bg">
+                <div className="max-w-7xl mx-auto px-6">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                      <div className="space-y-8 p-12 bg-white/5 rounded-[3rem] border border-white/5">
+                         <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
+                            <Target size={32} />
+                         </div>
+                         <h3 className="text-4xl font-display text-white uppercase">Our Mission</h3>
+                         <p className="text-white/60 text-lg leading-relaxed">
+                            To create an inclusive platform where students from diverse backgrounds can master the art of diplomacy,
+                            understand the complexity of global governance, and develop the courage to lead positive change in their communities.
+                         </p>
+                      </div>
+                      <div className="space-y-8 p-12 bg-white/5 rounded-[3rem] border border-white/5">
+                         <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
+                            <Activity size={32} />
+                         </div>
+                         <h3 className="text-4xl font-display text-white uppercase">Our Vision</h3>
+                         <p className="text-white/60 text-lg leading-relaxed">
+                            A world where every young leader is equipped with the critical thinking, empathy, and communication skills
+                            necessary to build a more harmonious and sustainable international community.
+                         </p>
+                      </div>
+                   </div>
+                </div>
+             </section>
+
+             {/* Conference Pillars */}
+             <section className="py-32 border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-6">
+                   <div className="mb-20">
+                      <p className="sec-label">Foundations</p>
+                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Conference Pillars</h2>
+                   </div>
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                      {conferencePillars.map((pillar, i) => (
+                        <div key={i} className="p-8 space-y-6 bg-white/2 rounded-3xl border border-white/5 hover:border-accent/20 transition-all">
+                           <div className="text-accent">
+                              <pillar.icon size={32} />
+                           </div>
+                           <h4 className="text-2xl font-display text-white uppercase">{pillar.title}</h4>
+                           <p className="text-white/40 text-sm leading-relaxed">{pillar.desc}</p>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+             </section>
+
+             {/* Team Section */}
+             <section className="py-32 border-t border-white/5 bg-bg">
                 <div className="max-w-7xl mx-auto px-6">
                    <div className="mb-24 text-center">
-                      <p className="sec-label justify-center">The Team</p>
-                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Secretariat</h2>
+                      <p className="sec-label justify-center">The Board</p>
+                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Secretariat Team</h2>
                    </div>
-                   
-                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                      {secretariat.map((m) => (
-                        <div
-                          key={m.id} 
-                          className="bg-white/5 border border-white/5 rounded-[3rem] p-8 space-y-8 hover:border-accent/30 transition-all group shadow-xl"
-                        >
-                           <div className="aspect-square rounded-[2rem] overflow-hidden bg-bg border border-white/5 shadow-inner">
+
+                   {/* Core Leadership (Top Roles) */}
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
+                      {secretariat.filter(m =>
+                        m.role.toLowerCase().includes('general') ||
+                        m.role.toLowerCase().includes('affairs') ||
+                        m.role.toLowerCase().includes('director')
+                      ).map((m) => (
+                        <div key={m.id} className="bg-white/5 border border-accent/20 rounded-[3rem] p-10 space-y-8 hover:bg-white/[0.07] transition-all group shadow-2xl relative overflow-hidden">
+                           <div className="absolute top-0 right-0 p-8">
+                              <Shield className="text-accent/20" size={40} />
+                           </div>
+                           <div className="aspect-square rounded-[2.5rem] overflow-hidden bg-bg border border-white/5">
                              <img src={m.image_url || ''} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt={m.name} />
                            </div>
-                           <div className="text-center space-y-3">
-                             <h4 className="text-2xl font-display uppercase text-white tracking-wide">{m.name}</h4>
-                             <p className="font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-accent">{m.role}</p>
+                           <div className="space-y-4">
+                             <h4 className="text-3xl font-display uppercase text-white tracking-wide leading-none">{m.name}</h4>
+                             <p className="font-ui text-xs font-bold uppercase tracking-[0.4em] text-accent">{m.role}</p>
+                             {m.message && (
+                                <p className="text-white/40 text-sm italic leading-relaxed pt-4 border-t border-white/5">
+                                   "{m.message.slice(0, 100)}..."
+                                </p>
+                             )}
+                           </div>
+                        </div>
+                      ))}
+                   </div>
+                   
+                   {/* Other Secretariat */}
+                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                      {secretariat.filter(m =>
+                        !(m.role.toLowerCase().includes('general') ||
+                          m.role.toLowerCase().includes('affairs') ||
+                          m.role.toLowerCase().includes('director'))
+                      ).map((m) => (
+                        <div
+                          key={m.id} 
+                          className="bg-white/2 border border-white/5 rounded-3xl p-6 space-y-6 hover:border-accent/30 transition-all group"
+                        >
+                           <div className="aspect-square rounded-2xl overflow-hidden bg-bg border border-white/5">
+                             <img src={m.image_url || ''} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={m.name} />
+                           </div>
+                           <div className="text-center space-y-2">
+                             <h4 className="text-lg font-display uppercase text-white tracking-wide">{m.name}</h4>
+                             <p className="font-ui text-[8px] font-bold uppercase tracking-widest text-accent/60">{m.role}</p>
                            </div>
                         </div>
                       ))}
                    </div>
                 </div>
              </section>
+
 
              {/* Gallery Preview in About */}
              <section className="py-32 border-t border-white/5">
@@ -625,7 +714,7 @@ export default function App() {
              </section>
 
              {/* Sponsors Section in About */}
-             <section className="py-32 border-t border-white/5 bg-bg-dark">
+             <section className="py-32 border-t border-white/5 bg-bg">
                 <div className="max-w-7xl mx-auto px-6 text-center">
                    <div className="mb-20">
                       <p className="sec-label justify-center">Partners</p>
