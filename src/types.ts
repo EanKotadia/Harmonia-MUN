@@ -33,6 +33,7 @@ export type Member = {
   image_url: string | null;
   committee_id: string | null;
   category: MemberCategory;
+  message: string | null;
   sort_order: number;
   created_at: string;
 };

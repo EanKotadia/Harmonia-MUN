@@ -790,6 +790,16 @@ export default function AdminPanel({
                               {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                            </select>
                         </div>
+                                                <div className="col-span-2 space-y-2">
+                           <label className="text-[9px] font-bold text-muted uppercase tracking-widest pl-1">Personal Message (for Secretariat)</label>
+                           <textarea
+                              value={m.message || ''}
+                              placeholder="A message to the delegates..."
+                              onChange={(e) => updateItem('members', m.id, { message: e.target.value })}
+                              className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none focus:border-accent/40 min-h-[100px] resize-none"
+                           />
+                        </div>
+
                         <div className="col-span-2 space-y-2">
                            <label className="text-[9px] font-bold text-muted uppercase tracking-widest pl-1">Image URL</label>
                            <input

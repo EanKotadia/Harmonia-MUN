@@ -366,6 +366,51 @@ export default function App() {
                 </div>
               </div>
             </section>
+
+            {/* VOICES OF LEADERSHIP */}
+            <section className="py-24 bg-bg border-b border-white/5">
+              <div className="max-w-7xl mx-auto px-6">
+                <div className="mb-20 text-center">
+                   <p className="sec-label justify-center">Messages</p>
+                   <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Voices of Leadership</h2>
+                </div>
+
+                <div className="grid grid-cols-1 gap-12">
+                   {members.filter(m => m.category === 'Secretariat' && m.message).length > 0 ? (
+                      members.filter(m => m.category === 'Secretariat' && m.message).map((m, i) => (
+                        <motion.div
+                          key={m.id}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="bg-white/5 border border-white/5 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center md:items-start group hover:border-accent/20 transition-all shadow-2xl"
+                        >
+                           <div className="w-48 h-48 md:w-64 md:h-64 rounded-[2rem] overflow-hidden border border-white/10 shrink-0 shadow-2xl group-hover:scale-105 transition-transform duration-700">
+                              <img src={m.image_url || ''} alt={m.name} className="w-full h-full object-cover" />
+                           </div>
+                           <div className="space-y-8 flex-1">
+                              <div className="space-y-2 text-center md:text-left">
+                                 <h3 className="text-4xl md:text-5xl font-display text-white uppercase tracking-tight leading-none">{m.name}</h3>
+                                 <p className="font-ui text-xs font-bold uppercase tracking-[0.4em] text-accent">{m.role}</p>
+                              </div>
+                              <div className="prose prose-invert prose-lg max-w-none">
+                                 <p className="text-white/60 italic leading-relaxed text-xl">
+                                    "{m.message}"
+                                 </p>
+                              </div>
+                              <div className="w-12 h-1 bg-accent/20 rounded-full mx-auto md:mx-0" />
+                           </div>
+                        </motion.div>
+                      ))
+                   ) : (
+                      <div className="py-24 border border-dashed border-white/5 rounded-[3rem] flex flex-col items-center justify-center text-center space-y-4">
+                         <Users className="text-white/5" size={64} />
+                         <p className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-muted">Leadership messages will be added soon</p>
+                      </div>
+                   )}
+                </div>
+              </div>
+            </section>
           </div>
         );
 
@@ -514,7 +559,52 @@ export default function App() {
                       ))}
                    </div>
                 </div>
-             </section>
+                         {/* VOICES OF LEADERSHIP */}
+            <section className="py-24 bg-bg">
+              <div className="max-w-7xl mx-auto px-6">
+                <div className="mb-20 text-center">
+                   <p className="sec-label justify-center">Messages</p>
+                   <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Voices of Leadership</h2>
+                </div>
+
+                <div className="grid grid-cols-1 gap-12">
+                   {members.filter(m => m.category === 'Secretariat' && m.message).length > 0 ? (
+                      members.filter(m => m.category === 'Secretariat' && m.message).map((m, i) => (
+                        <motion.div
+                          key={m.id}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="bg-white/5 border border-white/5 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center md:items-start group hover:border-accent/20 transition-all shadow-2xl"
+                        >
+                           <div className="w-48 h-48 md:w-64 md:h-64 rounded-[2rem] overflow-hidden border border-white/10 shrink-0 shadow-2xl group-hover:scale-105 transition-transform duration-700">
+                              <img src={m.image_url || ''} alt={m.name} className="w-full h-full object-cover" />
+                           </div>
+                           <div className="space-y-8 flex-1">
+                              <div className="space-y-2 text-center md:text-left">
+                                 <h3 className="text-4xl md:text-5xl font-display text-white uppercase tracking-tight leading-none">{m.name}</h3>
+                                 <p className="font-ui text-xs font-bold uppercase tracking-[0.4em] text-accent">{m.role}</p>
+                              </div>
+                              <div className="prose prose-invert prose-lg max-w-none">
+                                 <p className="text-white/60 italic leading-relaxed text-xl">
+                                    "{m.message}"
+                                 </p>
+                              </div>
+                              <div className="w-12 h-1 bg-accent/20 rounded-full mx-auto md:mx-0" />
+                           </div>
+                        </motion.div>
+                      ))
+                   ) : (
+                      <div className="py-24 border border-dashed border-white/5 rounded-[3rem] flex flex-col items-center justify-center text-center space-y-4">
+                         <Users className="text-white/5" size={64} />
+                         <p className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-muted">Leadership messages will be added soon</p>
+                      </div>
+                   )}
+                </div>
+              </div>
+            </section>
+
+            </section>
           </div>
         );
 
