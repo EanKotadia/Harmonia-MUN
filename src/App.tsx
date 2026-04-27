@@ -530,327 +530,121 @@ export default function App() {
 
       case 'about':
         const secretariat = members.filter(m => m.category === 'Secretariat');
-        const eb = members.filter(m => m.category === 'EB');
         return (
           <div className="space-y-0 bg-bg">
-             {/* Main About Section */}
-             <section className="py-24 px-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                   <motion.div
-                      initial={{ opacity: 0, x: -30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      className="space-y-8"
-                   >
-                      <div className="space-y-4">
-                         <p className="sec-label">The Conference</p>
-                         <h2 className="text-6xl md:text-7xl font-display uppercase text-white">About <br/> Harmonia MUN</h2>
+             {/* Impactful Intro Section */}
+             <section className="py-32 px-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                   <div className="space-y-12">
+                      <div className="space-y-6">
+                         <p className="sec-label">The Legacy</p>
+                         <h2 className="text-7xl md:text-9xl font-display uppercase text-white leading-tight">Beyond <br/> Boundaries.</h2>
                       </div>
-                      <div className="prose prose-invert prose-lg text-white/60 font-sans leading-relaxed">
+                      <div className="space-y-8 text-white/60 font-sans text-xl leading-relaxed max-w-xl">
                          <p>
-                            Harmonia Model United Nations is a premier diplomatic simulation hosted by Shalom Group of Schools.
-                            Our conference provides a platform for young minds to engage in meaningful dialogue,
-                            tackle global challenges, and develop essential leadership skills.
+                            Harmonia Model United Nations, hosted by Shalom Group of Schools, represents the pinnacle of student-led diplomacy.
+                            We empower the next generation of global thinkers to engage in rigorous debate and collaborative problem-solving.
                          </p>
                          <p>
-                            With a legacy of excellence, Chapter 2 brings together delegates from across the region
-                             to collaborate, negotiate, and innovate towards a more harmonious future.
+                            Our mission is to foster a deeper understanding of international relations while building essential
+                            leadership, public speaking, and negotiation skills in every delegate.
                          </p>
                       </div>
-                      <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
-                         <div>
-                            <h4 className="text-3xl font-display text-accent">300+</h4>
-                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Delegates</p>
+                      <div className="flex gap-12 pt-8 border-t border-white/5">
+                         <div className="space-y-1">
+                            <p className="text-4xl font-display text-accent">02</p>
+                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Successful Chapters</p>
                          </div>
-                         <div>
-                            <h4 className="text-3xl font-display text-accent">12+</h4>
-                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Committees</p>
+                         <div className="space-y-1">
+                            <p className="text-4xl font-display text-accent">1000+</p>
+                            <p className="font-ui text-[10px] font-bold uppercase tracking-widest text-muted">Delegates Reached</p>
                          </div>
                       </div>
-                   </motion.div>
-                   <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      className="relative"
-                   >
-                      <div className="aspect-[16/10] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative">
+                   </div>
+                   <div className="relative">
+                      <div className="aspect-[4/5] rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl relative bg-white/5">
                          <img
                            src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1000"
                            alt="Conference"
-                           className="w-full h-full object-cover"
+                           className="w-full h-full object-cover grayscale"
                          />
-                         <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/60 via-transparent to-transparent" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
                       </div>
-                   </motion.div>
+                      <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/10 blur-3xl rounded-full" />
+                   </div>
                 </div>
              </section>
 
-             {/* Secretariat */}
-             <section className="py-24 border-t border-white/5">
+             {/* Premium Secretariat Section */}
+             <section className="py-32 border-t border-white/5 bg-bg-dark">
                 <div className="max-w-7xl mx-auto px-6">
-                   <div className="text-center mb-16">
-                      <div className="flex items-center justify-center gap-4 mb-4">
-                         <div className="h-[1px] w-8 bg-accent/40" />
-                         <span className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Leadership</span>
-                         <div className="h-[1px] w-8 bg-accent/40" />
-                      </div>
+                   <div className="mb-24 text-center">
+                      <p className="sec-label justify-center">The Team</p>
                       <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Secretariat</h2>
                    </div>
                    
-                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {secretariat.map((m, i) => (
-                        <motion.div 
-                          initial={{ opacity: 0, y: 20 }} 
-                          animate={{ opacity: 1, y: 0 }} 
-                          transition={{ delay: i * 0.1 }}
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                      {secretariat.map((m) => (
+                        <div
                           key={m.id} 
-                          className="bg-white/5 border border-white/5 rounded-[2rem] p-6 space-y-6 hover:border-accent/20 transition-all group"
+                          className="bg-white/5 border border-white/5 rounded-[3rem] p-8 space-y-8 hover:border-accent/30 transition-all group shadow-xl"
                         >
-                           <div className="aspect-square rounded-2xl overflow-hidden bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-700">
-                             <img src={m.image_url || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'} className="w-full h-full object-cover" />
+                           <div className="aspect-square rounded-[2rem] overflow-hidden bg-bg border border-white/5 shadow-inner">
+                             <img src={m.image_url || ''} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt={m.name} />
                            </div>
-                           <div className="text-center space-y-2">
-                             <h4 className="text-xl font-display uppercase text-white">{m.name}</h4>
-                             <p className="text-[10px] font-bold uppercase tracking-widest text-accent">{m.role}</p>
+                           <div className="text-center space-y-3">
+                             <h4 className="text-2xl font-display uppercase text-white tracking-wide">{m.name}</h4>
+                             <p className="font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-accent">{m.role}</p>
                            </div>
-                        </motion.div>
+                        </div>
                       ))}
                    </div>
                 </div>
              </section>
 
-             {/* Gallery Section - Merged into About */}
-             <section className="py-24 border-t border-white/5 bg-white/[0.01]">
+             {/* Gallery Preview in About */}
+             <section className="py-32 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-6">
-                   <div className="text-center mb-16">
-                      <p className="sec-label">Visuals</p>
-                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Gallery</h2>
-                   </div>
-                   {gallery.length === 0 ? (
-                      <div className="h-60 rounded-3xl border border-white/5 flex items-center justify-center text-muted">
-                        No media available
+                   <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                      <div className="space-y-4">
+                        <p className="sec-label">Visuals</p>
+                        <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Moments</h2>
                       </div>
-                   ) : (
-                    <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                      {gallery.slice(0, 6).map((item) => (
-                        <div key={item.id} className="relative group overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 break-inside-avoid shadow-2xl">
-                           {item.type === 'video' ? (
-                             <div className="aspect-video bg-bg flex items-center justify-center">
-                               <ImageIcon size={48} className="text-white/10" />
-                             </div>
-                           ) : (
-                             <img
-                               src={item.url}
-                               alt={item.title}
-                               className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                             />
-                           )}
-                           <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 pointer-events-none">
-                             <h3 className="font-display text-2xl text-white uppercase tracking-wider">{item.title}</h3>
-                           </div>
+                      <button onClick={() => setActiveTab('gallery')} className="btn-ghost px-10 py-4 text-[10px] border-white/10 text-white hover:border-white">
+                         Explore Gallery
+                      </button>
+                   </div>
+                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                      {gallery.slice(0, 3).map((item) => (
+                        <div key={item.id} className="aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-white/5 bg-white/5 group shadow-2xl">
+                           <img src={item.url} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt={item.title} />
                         </div>
                       ))}
-                    </div>
-                   )}
+                   </div>
                 </div>
              </section>
 
-             {/* Sponsors Section - Merged into About */}
-             <section className="py-24 border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-6">
-                   <div className="text-center mb-16">
-                      <p className="sec-label">Partners</p>
-                      <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Our Sponsors</h2>
+             {/* Sponsors Section in About */}
+             <section className="py-32 border-t border-white/5 bg-bg-dark">
+                <div className="max-w-7xl mx-auto px-6 text-center">
+                   <div className="mb-20">
+                      <p className="sec-label justify-center">Partners</p>
+                      <h2 className="text-5xl md:text-7xl font-display uppercase text-white">Our Global Support</h2>
                    </div>
-                   <div className="grid grid-cols-2 md:grid-cols-4 gap-12 opacity-40">
-                      {sponsors.length === 0 ? [1,2,3,4].map(i => (
-                        <div key={i} className="h-24 flex items-center justify-center border border-dashed border-white/20 rounded-2xl">
-                           <span className="text-[10px] font-bold uppercase">Partner {i}</span>
-                        </div>
-                      )) : sponsors.map(s => (
-                        <div key={s.id} className="flex items-center justify-center">
-                           <img src={s.logo_url || ''} alt={s.name} className="h-16 object-contain grayscale" />
+                   <div className="flex flex-wrap justify-center gap-20 opacity-30">
+                      {sponsors.map(s => (
+                        <div key={s.id} className="h-16 flex items-center grayscale">
+                           <img src={s.logo_url || ''} alt={s.name} className="h-full object-contain" />
                         </div>
                       ))}
                    </div>
                 </div>
-                         {/* VOICES OF LEADERSHIP */}
-            <section className="py-24 bg-bg">
-              <div className="max-w-7xl mx-auto px-6">
-                <div className="mb-20 text-center">
-                   <p className="sec-label justify-center">Messages</p>
-                   <h2 className="text-6xl md:text-8xl font-display uppercase text-white">Voices of Leadership</h2>
-                </div>
-
-                <div className="grid grid-cols-1 gap-12">
-                   {members.filter(m => m.category === 'Secretariat' && m.message).length > 0 ? (
-                      members.filter(m => m.category === 'Secretariat' && m.message).map((m, i) => (
-                        <motion.div
-                          key={m.id}
-                          initial={{ opacity: 0, y: 30 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          className="bg-white/5 border border-white/5 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center md:items-start group hover:border-accent/20 transition-all shadow-2xl"
-                        >
-                           <div className="w-48 h-48 md:w-64 md:h-64 rounded-[2rem] overflow-hidden border border-white/10 shrink-0 shadow-2xl group-hover:scale-105 transition-transform duration-700">
-                              <img src={m.image_url || ''} alt={m.name} className="w-full h-full object-cover" />
-                           </div>
-                           <div className="space-y-8 flex-1">
-                              <div className="space-y-2 text-center md:text-left">
-                                 <h3 className="text-4xl md:text-5xl font-display text-white uppercase tracking-tight leading-none">{m.name}</h3>
-                                 <p className="font-ui text-xs font-bold uppercase tracking-[0.4em] text-accent">{m.role}</p>
-                              </div>
-                              <div className="prose prose-invert prose-lg max-w-none">
-                                 <p className="text-white/60 italic leading-relaxed text-xl">
-                                    "{m.message}"
-                                 </p>
-                              </div>
-                              <div className="w-12 h-1 bg-accent/20 rounded-full mx-auto md:mx-0" />
-                           </div>
-                        </motion.div>
-                      ))
-                   ) : (
-                      <div className="py-24 border border-dashed border-white/5 rounded-[3rem] flex flex-col items-center justify-center text-center space-y-4">
-                         <Users className="text-white/5" size={64} />
-                         <p className="font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-muted">Leadership messages will be added soon</p>
-                      </div>
-                   )}
-                </div>
-              </div>
-            </section>
-
-            {/* COMMITTEE SHOWCASE */}
-            <section className="py-24 bg-bg border-t border-white/5">
-              <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                  <div className="space-y-4">
-                    <p className="sec-label">Academics</p>
-                    <h2 className="text-6xl md:text-7xl font-display uppercase text-white">The Councils</h2>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab('committees')}
-                    className="flex items-center gap-3 text-accent font-ui text-[10px] font-bold uppercase tracking-widest hover:gap-5 transition-all"
-                  >
-                    View All Committees <ArrowRight size={16} />
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {categories.slice(0, 3).map((cat) => (
-                    <div
-                      key={cat.id}
-                      onClick={() => {
-                        setSelectedCategory(cat.id);
-                        setActiveTab('committee-detail');
-                        window.location.hash = `committees/${cat.slug || cat.id}`;
-                      }}
-                      className="bg-white/5 border border-white/5 rounded-3xl p-8 space-y-6 hover:border-accent/20 transition-all cursor-pointer group"
-                    >
-                      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
-                        {cat.icon || '🛡️'}
-                      </div>
-                      <div className="space-y-3">
-                         <h3 className="text-2xl font-display text-white uppercase tracking-wider">{cat.name}</h3>
-                         <p className="text-muted text-sm line-clamp-3">{cat.description}</p>
-                      </div>
-                      <div className="pt-4 flex items-center gap-2 text-accent font-ui text-[9px] font-bold uppercase tracking-widest">
-                         Details <ChevronRight size={12} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* TIMELINE PREVIEW */}
-            <section className="py-24 bg-bg border-t border-white/5">
-              <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                  <div className="space-y-4">
-                    <p className="sec-label">Schedule</p>
-                    <h2 className="text-6xl md:text-7xl font-display uppercase text-white">Timeline</h2>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab('schedule')}
-                    className="flex items-center gap-3 text-accent font-ui text-[10px] font-bold uppercase tracking-widest hover:gap-5 transition-all"
-                  >
-                    Full Schedule <ArrowRight size={16} />
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {schedule.slice(0, 4).map((item) => (
-                    <div key={item.id} className="bg-white/5 border border-white/5 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/[0.07] transition-all">
-                      <div className="flex items-center gap-8">
-                         <div className="text-3xl font-display text-white/20 uppercase w-32">{item.time_start}</div>
-                         <div>
-                            <h4 className="text-xl font-display text-white uppercase tracking-wide">{item.title}</h4>
-                            <p className="text-[10px] font-bold text-accent uppercase tracking-widest">{item.venue}</p>
-                         </div>
-                      </div>
-                      <span className="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full font-ui text-[9px] font-bold uppercase tracking-widest text-muted">
-                        {item.day_label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* GALLERY HIGHLIGHTS */}
-            <section className="py-24 bg-bg border-t border-white/5">
-               <div className="max-w-7xl mx-auto px-6">
-                  <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                    <div className="space-y-4">
-                      <p className="sec-label">Visuals</p>
-                      <h2 className="text-6xl md:text-7xl font-display uppercase text-white">Moments</h2>
-                    </div>
-                    <button
-                      onClick={() => setActiveTab('gallery')}
-                      className="flex items-center gap-3 text-accent font-ui text-[10px] font-bold uppercase tracking-widest hover:gap-5 transition-all"
-                    >
-                      View Gallery <ArrowRight size={16} />
-                    </button>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {gallery.slice(0, 4).map((img) => (
-                      <div key={img.id} className="aspect-square rounded-3xl overflow-hidden border border-white/5 bg-white/5 group">
-                         <img src={img.url} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={img.title} />
-                      </div>
-                    ))}
-                    {gallery.length === 0 && [1,2,3,4].map(i => (
-                       <div key={i} className="aspect-square rounded-3xl bg-white/5 border border-dashed border-white/10 flex items-center justify-center">
-                          <ImageIcon className="text-white/5" size={40} />
-                       </div>
-                    ))}
-                  </div>
-               </div>
-            </section>
-
-            {/* PARTNERS */}
-            <section className="py-24 bg-bg border-t border-white/5">
-               <div className="max-w-7xl mx-auto px-6">
-                  <div className="text-center mb-16">
-                     <p className="sec-label justify-center">Support</p>
-                     <h2 className="text-4xl font-display uppercase text-white/60">Our Global Partners</h2>
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-16 opacity-30">
-                     {sponsors.length === 0 ? [1,2,3,4].map(i => (
-                        <div key={i} className="h-12 w-32 border border-dashed border-white/20 rounded-xl" />
-                     )) : sponsors.map(s => (
-                        <div key={s.id} className="h-16 flex items-center">
-                           <img src={s.logo_url || ''} className="h-full object-contain grayscale" alt={s.name} />
-                        </div>
-                     ))}
-                  </div>
-               </div>
-            </section>
-
-                        </section>
+             </section>
           </div>
         );
 
-      case 'committees':
+
+            case 'committees':
         return (
           <section className="py-32" id="committees">
             <div className="max-w-7xl mx-auto px-6">
