@@ -35,7 +35,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-white/5 border border-border rounded-[32px] overflow-hidden flex flex-col h-full hover:border-accent/30 transition-all group cursor-pointer"
+        className="bg-white/5 border border-border rounded-[2.5rem] overflow-hidden flex flex-col h-full hover:border-accent/30 transition-all group cursor-pointer"
       >
         <div className="aspect-video bg-bg-dark overflow-hidden relative border-b border-white/5">
            {cat.image_url ? (
@@ -50,7 +50,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
            </div>
         </div>
 
-        <div className="p-8 space-y-4 flex-1 flex flex-col">
+        <div className="p-10 space-y-6 flex-1 flex flex-col">
           <motion.h3 layoutId={`title-${cat.id}`} className="text-3xl font-display uppercase tracking-wider">{cat.name}</motion.h3>
           <p className="text-muted text-sm line-clamp-2">{cat.description}</p>
           <div className="mt-auto pt-6 flex items-center justify-between text-accent font-ui text-[10px] font-bold uppercase tracking-widest group-hover:gap-2 transition-all">
@@ -91,7 +91,7 @@ export default function EventsSection({ categories, matches, members, setActiveT
                                 <div className="flex flex-col md:flex-row gap-12 items-start">
                   <div className="flex-1 space-y-12 w-full">
                     <div className="flex items-center gap-8">
-                      <motion.div layoutId={`icon-${expandedId}`} className="w-24 h-24 bg-white/5 rounded-[32px] flex items-center justify-center text-6xl overflow-hidden">
+                      <motion.div layoutId={`icon-${expandedId}`} className="w-24 h-24 bg-white/5 rounded-[2.5rem] flex items-center justify-center text-6xl overflow-hidden">
                         {expandedCategory.icon || '🛡️'}
                       </motion.div>
                       <div>

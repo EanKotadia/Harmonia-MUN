@@ -308,11 +308,11 @@ export default function App() {
             <section className="relative py-32 md:py-48 flex flex-col items-center justify-center text-center px-6 bg-bg overflow-hidden" id="home">
               <div className="relative z-10 max-w-4xl space-y-16">
                 <div className="space-y-8">
-                  <p className="font-ui text-[14px] md:text-[18px] font-bold uppercase tracking-[0.6em] text-accent">Shalom Group of Schools Presents</p>
-                  <h1 className="text-[14vw] md:text-[10vw] font-display uppercase tracking-tight leading-[0.8] text-white">
+                  <p className="hero-eyebrow font-bold uppercase tracking-[0.6em] text-accent">Shalom Group of Schools Presents</p>
+                  <h1 className="hero-title font-display uppercase tracking-tight leading-[0.8] text-white">
                     Harmonia <br/> <span className="text-accent">MUN 2026</span>
                   </h1>
-                  <p className="font-ui text-lg md:text-2xl font-medium tracking-[0.2em] uppercase text-white/50 max-w-2xl mx-auto">
+                  <p className="hero-sub uppercase text-white/50 max-w-2xl mx-auto">
                     Beyond Words. Towards Action.
                   </p>
                 </div>

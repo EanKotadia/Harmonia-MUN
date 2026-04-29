@@ -51,10 +51,10 @@ export default function LoginForm({ onSuccess, onBack }: LoginFormProps) {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center p-6">
+    <div className="min-h-[80vh] flex items-center justify-center p-10">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-4">
-          <div className="w-20 h-20 bg-accent/10 text-accent rounded-3xl flex items-center justify-center mx-auto border border-accent/20">
+          <div className="w-20 h-20 bg-accent/10 text-accent rounded-[2.5rem] flex items-center justify-center mx-auto border border-accent/20">
             <Shield size={40} />
           </div>
           <h2 className="text-4xl font-display text-white uppercase tracking-tight">Admin Access</h2>

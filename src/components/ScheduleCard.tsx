@@ -43,7 +43,7 @@ const ScheduleCard = React.memo(({ item, category, index = 0, onCategoryClick }:
       <div className="relative pl-8 md:pl-12 pb-12 border-l border-border group-last:pb-0">
         {/* Node Dot */}
         <div className={cn(
-          "absolute left-[-6px] top-7 w-3 h-3 rounded-full border-2 border-bg z-10 transition-all duration-500",
+          "absolute left-[-6px] top-7 w-3 h-3 rounded-xl border-2 border-bg z-10 transition-all duration-500",
           isLive ? "bg-danger shadow-[0_0_15px_rgba(230,57,70,0.8)] scale-125 animate-pulse" :
           isCompleted ? "bg-success" : "bg-bg3 ring-1 ring-border"
         )} />

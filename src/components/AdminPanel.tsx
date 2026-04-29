@@ -117,11 +117,11 @@ const CategoryEditor = ({
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white/5 border border-white/5 rounded-[2.5rem] p-8 space-y-8 relative overflow-hidden group"
+      className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 space-y-8 relative overflow-hidden group"
     >
       <div className="flex items-center justify-between gap-6">
         <div className="flex items-center gap-6">
-          <div className="w-16 h-16 bg-white/5 rounded-3xl flex items-center justify-center text-accent text-3xl border border-white/5 group-hover:scale-105 transition-transform">
+          <div className="w-16 h-16 bg-white/5 rounded-3xl flex items-center justify-center text-accent text-3xl border border-white/10 group-hover:scale-105 transition-transform">
             {cat.icon || '🏛️'}
           </div>
           <div>
@@ -160,7 +160,7 @@ const CategoryEditor = ({
           <textarea
             value={cat.description || ''}
             onChange={(e) => updateCategory({ description: e.target.value })}
-            className="w-full bg-white/5 border border-white/5 rounded-[1.5rem] p-5 text-xs text-muted font-medium outline-none focus:border-accent/50 transition-all min-h-[120px] resize-none"
+            className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] p-5 text-xs text-muted font-medium outline-none focus:border-accent/50 transition-all min-h-[120px] resize-none"
             placeholder="Committee description..."
           />
         </div>
@@ -174,7 +174,7 @@ const CategoryEditor = ({
               type="text"
               value={cat.image_url || ''}
               onChange={(e) => updateCategory({ image_url: e.target.value })}
-              className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-white font-medium outline-none focus:border-accent/50 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-xs text-white font-medium outline-none focus:border-accent/50 transition-all"
               placeholder="https://.../committee-image.jpg"
             />
           </div>
@@ -187,7 +187,7 @@ const CategoryEditor = ({
               type="text"
               value={cat.bg_guide_url || ''}
               onChange={(e) => updateCategory({ bg_guide_url: e.target.value })}
-              className="w-full bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-xs text-accent font-medium outline-none focus:border-accent/50 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-xs text-accent font-medium outline-none focus:border-accent/50 transition-all"
               placeholder="https://.../guide.pdf"
             />
           </div>
@@ -205,8 +205,8 @@ const CategoryEditor = ({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
            {members.filter(m => m.committee_id === cat.id && m.category === 'EB').map(eb => (
-              <div key={eb.id} className="flex items-center gap-4 p-4 bg-white/5 border border-white/5 rounded-2xl group/eb">
-                 <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/5">
+              <div key={eb.id} className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl group/eb">
+                 <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10">
                     <img src={eb.image_url || ''} className="w-full h-full object-cover" alt={eb.name} />
                  </div>
                  <div>
@@ -240,7 +240,7 @@ const CategoryEditor = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {catResults.map(res => (
-            <div key={res.id} className="bg-white/5 border border-white/5 rounded-2xl p-4 flex gap-4 items-start group/res transition-all hover:border-white/10">
+            <div key={res.id} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex gap-4 items-start group/res transition-all hover:border-white/10">
               <div className="flex-1 space-y-3">
                 <input
                   type="text"
@@ -365,10 +365,10 @@ export default function AdminPanel({
   };
 
   return (
-    <div className="min-h-screen bg-bg-dark flex flex-col lg:flex-row relative">
+    <div className="min-h-screen bg-bg flex flex-col lg:flex-row relative">
       {/* Sidebar Navigation */}
-      <aside className="w-full lg:w-72 bg-[#0a0a0a] border-r border-white/5 flex flex-col flex-shrink-0 z-50">
-        <div className="p-8 border-b border-white/5">
+      <aside className="w-full lg:w-72 bg-[#0a0a0a] border-r border-white/10 flex flex-col flex-shrink-0 z-50">
+        <div className="p-8 border-b border-white/10">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 bg-accent rounded-1.5xl flex items-center justify-center text-bg shadow-lg shadow-accent/20">
               <Shield size={20} />
@@ -408,7 +408,7 @@ export default function AdminPanel({
           ))}
         </nav>
 
-        <div className="p-4 mt-auto border-t border-white/5">
+        <div className="p-4 mt-auto border-t border-white/10">
           <button
             onClick={onBack}
             className="w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-muted font-ui text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all"
@@ -425,10 +425,10 @@ export default function AdminPanel({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-bg-dark">
-        <header className="sticky top-0 z-40 bg-bg-dark/80 backdrop-blur-xl border-b border-white/5 h-32 flex items-center px-8 lg:px-12 justify-between">
+      <main className="flex-1 overflow-y-auto lg:h-screen custom-scrollbar relative bg-bg">
+        <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-xl border-b border-white/10 h-32 flex items-center px-8 lg:px-12 justify-between">
           <div className="flex items-center gap-6">
-            <div className="w-14 h-14 bg-white/5 rounded-[1.5rem] flex items-center justify-center text-accent border border-white/5 shadow-2xl">
+            <div className="w-14 h-14 bg-white/5 rounded-[1.5rem] flex items-center justify-center text-accent border border-white/10 shadow-2xl">
               {activeTab === 'sessions' && <Activity size={24} />}
               {activeTab === 'schedule' && <Calendar size={24} />}
               {activeTab === 'categories' && <Layers size={24} />}
@@ -478,7 +478,7 @@ export default function AdminPanel({
             </button>
             <button
               onClick={refresh}
-              className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-muted hover:text-accent transition-all"
+              className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-muted hover:text-accent transition-all"
             >
               <Activity size={18} />
             </button>
@@ -510,7 +510,7 @@ export default function AdminPanel({
           {activeTab === 'sessions' && (
             <div className="space-y-12">
                {/* Search & Filter Bar */}
-               <div className="bg-surface border border-white/5 p-4 rounded-[2.5rem] flex flex-col gap-6">
+               <div className="bg-surface border border-white/10 p-4 rounded-[2.5rem] flex flex-col gap-6">
                   <div className="relative">
                     <input
                       type="text"
@@ -580,7 +580,7 @@ export default function AdminPanel({
                         </div>
                         <button
                           onClick={() => addItem('matches', { committee_id: cat.id, session_no: catSessions.length + 1, status: 'upcoming', venue: 'Main Hall' })}
-                          className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-accent hover:text-bg border border-white/5 hover:border-accent rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all"
+                          className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-accent hover:text-bg border border-white/10 hover:border-accent rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all"
                         >
                           <Plus size={16} /> Add Session
                         </button>
@@ -591,11 +591,11 @@ export default function AdminPanel({
                           <motion.div
                              layout
                              key={s.id}
-                             className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl"
+                             className="bg-surface border border-white/10 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl"
                           >
                              <div className="flex items-start justify-between">
                                <div className="flex items-center gap-6">
-                                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex flex-col items-center justify-center border border-white/5">
+                                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex flex-col items-center justify-center border border-white/10">
                                      <span className="text-[9px] font-bold text-muted uppercase">SESS</span>
                                      <input
                                        type="number"
@@ -630,8 +630,8 @@ export default function AdminPanel({
                                </button>
                              </div>
 
-                             <div className="space-y-4 pt-6 border-t border-white/5">
-                                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                             <div className="space-y-4 pt-6 border-t border-white/10">
+                                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
                                    <Trophy size={18} className="text-accent" />
                                    <input
                                      type="text"
@@ -668,9 +668,9 @@ export default function AdminPanel({
 
             {activeTab === 'schedule' && (
               <motion.div key="schedule" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                <div className="bg-surface border border-white/5 p-6 rounded-[2rem] space-y-4">
+                <div className="bg-surface border border-white/10 p-6 rounded-[2rem] space-y-4">
                   {schedule.map(si => (
-                    <div key={si.id} className="bg-white/5 border border-white/5 rounded-2xl p-6 flex flex-col lg:flex-row items-center gap-8 group hover:border-accent/20 transition-all">
+                    <div key={si.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col lg:flex-row items-center gap-8 group hover:border-accent/20 transition-all">
                       <div className="flex items-center gap-4 w-full lg:w-48">
                          <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-accent/50 group-hover:text-accent transition-colors">
                             <Clock size={16} />
@@ -728,7 +728,7 @@ export default function AdminPanel({
             {activeTab === 'members' && (
               <motion.div key="members" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {members.map(m => (
-                  <div key={m.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all">
+                  <div key={m.id} className="bg-surface border border-white/10 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all">
                     <div className="flex justify-between items-start">
                       <div className="w-24 h-24 rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center">
                         {m.image_url ? (
@@ -751,7 +751,7 @@ export default function AdminPanel({
                           type="text"
                           value={m.name}
                           onChange={(e) => updateItem('members', m.id, { name: e.target.value })}
-                          className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none focus:border-accent/40"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none focus:border-accent/40"
                           placeholder="Name"
                         />
                       </div>
@@ -761,7 +761,7 @@ export default function AdminPanel({
                           type="text"
                           value={m.role}
                           onChange={(e) => updateItem('members', m.id, { role: e.target.value })}
-                          className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-accent outline-none focus:border-accent/40"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-accent outline-none focus:border-accent/40"
                           placeholder="Role"
                         />
                       </div>
@@ -771,7 +771,7 @@ export default function AdminPanel({
                            <select
                               value={m.category}
                               onChange={(e) => updateItem('members', m.id, { category: e.target.value })}
-                              className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-bold text-muted outline-none focus:border-accent/40"
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-bold text-muted outline-none focus:border-accent/40"
                            >
                               <option value="Secretariat">Secretariat</option>
                               <option value="EB">Executive Board</option>
@@ -783,7 +783,7 @@ export default function AdminPanel({
                            <select
                               value={m.committee_id || ''}
                               onChange={(e) => updateItem('members', m.id, { committee_id: e.target.value || null })}
-                              className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-bold text-muted outline-none focus:border-accent/40"
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-bold text-muted outline-none focus:border-accent/40"
                            >
                               <option value="">No Committee</option>
                               {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -795,7 +795,7 @@ export default function AdminPanel({
                               value={m.message || ''}
                               placeholder="A message to the delegates..."
                               onChange={(e) => updateItem('members', m.id, { message: e.target.value })}
-                              className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none focus:border-accent/40 min-h-[100px] resize-none"
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none focus:border-accent/40 min-h-[100px] resize-none"
                            />
                         </div>
 
@@ -806,7 +806,7 @@ export default function AdminPanel({
                               value={m.image_url || ''}
                               placeholder="https://..."
                               onChange={(e) => updateItem('members', m.id, { image_url: e.target.value })}
-                              className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none focus:border-accent/40"
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none focus:border-accent/40"
                            />
                         </div>
                       </div>
@@ -820,7 +820,7 @@ export default function AdminPanel({
               <div className="space-y-8">
                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                   {sponsors.map(s => (
-                    <div key={s.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl">
+                    <div key={s.id} className="bg-surface border border-white/10 rounded-[2.5rem] p-8 space-y-8 group hover:border-accent/20 transition-all shadow-2xl">
                       <div className="h-32 rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center p-6 relative group">
                         {s.logo_url ? <img src={s.logo_url} className="max-w-full max-h-full object-contain" /> : <div className="text-muted flex flex-col items-center gap-2"><Heart size={32} /><span className="text-[8px] font-bold">NO LOGO</span></div>}
                       </div>
@@ -831,7 +831,7 @@ export default function AdminPanel({
                             type="text"
                             value={s.name}
                             onChange={(e) => updateItem('sponsors', s.id, { name: e.target.value })}
-                            className="bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none w-full text-center focus:border-accent/40"
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none w-full text-center focus:border-accent/40"
                           />
                         </div>
                         <div className="space-y-2">
@@ -841,7 +841,7 @@ export default function AdminPanel({
                             placeholder="Platinum / Gold / etc"
                             value={s.tier || ''}
                             onChange={(e) => updateItem('sponsors', s.id, { tier: e.target.value })}
-                            className="bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-bold uppercase tracking-[0.3em] text-accent outline-none w-full text-center focus:border-accent/40"
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-bold uppercase tracking-[0.3em] text-accent outline-none w-full text-center focus:border-accent/40"
                           />
                         </div>
                         <div className="space-y-2">
@@ -851,7 +851,7 @@ export default function AdminPanel({
                             value={s.logo_url || ''}
                             placeholder="https://..."
                             onChange={(e) => updateItem('sponsors', s.id, { logo_url: e.target.value })}
-                            className="bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none w-full focus:border-accent/40"
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[9px] font-medium text-white outline-none w-full focus:border-accent/40"
                           />
                         </div>
                         <button onClick={() => deleteItem('sponsors', s.id)} className="w-full py-4 bg-red-500/10 text-red-500 rounded-2xl text-[9px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all opacity-0 group-hover:opacity-100 shadow-lg shadow-red-500/10">
@@ -867,7 +867,7 @@ export default function AdminPanel({
             {activeTab === 'notices' && (
               <div className="space-y-6">
                 {notices.map(n => (
-                  <div key={n.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-8 space-y-6">
+                  <div key={n.id} className="bg-surface border border-white/10 rounded-[2.5rem] p-8 space-y-6">
                     <div className="flex items-center justify-between">
                       <input
                         type="text"
@@ -894,7 +894,7 @@ export default function AdminPanel({
                     <textarea
                       value={n.content}
                       onChange={(e) => updateItem('notices', n.id, { content: e.target.value })}
-                      className="w-full bg-white/5 border border-white/5 rounded-2xl p-6 text-sm text-muted font-medium min-h-[150px] outline-none"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-sm text-muted font-medium min-h-[150px] outline-none"
                       placeholder="Markdown content..."
                     />
                   </div>
@@ -905,12 +905,12 @@ export default function AdminPanel({
             {activeTab === 'gallery' && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {gallery.map(item => (
-                  <div key={item.id} className="bg-surface border border-white/5 rounded-[2.5rem] p-6 space-y-6 group">
+                  <div key={item.id} className="bg-surface border border-white/10 rounded-[2.5rem] p-6 space-y-6 group">
                      <div className="aspect-video rounded-2xl overflow-hidden bg-white/5 relative">
                         <img src={item.url} className="w-full h-full object-cover" />
                         <button 
                           onClick={() => deleteItem('gallery', item.id)}
-                          className="absolute top-4 right-4 p-3 bg-bg-dark/60 backdrop-blur-xl text-white/40 hover:text-danger rounded-xl opacity-0 group-hover:opacity-100 transition-all"
+                          className="absolute top-4 right-4 p-3 bg-bg/60 backdrop-blur-xl text-white/40 hover:text-danger rounded-xl opacity-0 group-hover:opacity-100 transition-all"
                         >
                           <Trash2 size={18} />
                         </button>
@@ -920,14 +920,14 @@ export default function AdminPanel({
                           type="text"
                           value={item.title}
                           onChange={(e) => updateItem('gallery', item.id, { title: e.target.value })}
-                          className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none"
                           placeholder="Media Title"
                         />
                         <div className="grid grid-cols-2 gap-4">
                           <select
                             value={item.type}
                             onChange={(e) => updateItem('gallery', item.id, { type: e.target.value })}
-                            className="bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[10px] font-bold uppercase text-accent outline-none"
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] font-bold uppercase text-accent outline-none"
                           >
                             <option value="image">Image</option>
                             <option value="video">Video</option>
@@ -936,14 +936,14 @@ export default function AdminPanel({
                             type="number"
                             value={item.year || 2026}
                             onChange={(e) => updateItem('gallery', item.id, { year: parseInt(e.target.value) })}
-                            className="bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[10px] font-bold text-center text-white outline-none"
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] font-bold text-center text-white outline-none"
                           />
                         </div>
                         <input
                           type="text"
                           value={item.url}
                           onChange={(e) => updateItem('gallery', item.id, { url: e.target.value })}
-                          className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-[10px] font-medium text-muted outline-none"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] font-medium text-muted outline-none"
                           placeholder="URL (https://...)"
                         />
                      </div>
@@ -954,7 +954,7 @@ export default function AdminPanel({
 
             {activeTab === 'settings' && (
               <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl space-y-12">
-                <div className="bg-surface border border-white/5 rounded-[3rem] p-10 space-y-12 shadow-2xl">
+                <div className="bg-surface border border-white/10 rounded-[3rem] p-10 space-y-12 shadow-2xl">
                    <div className="grid md:grid-cols-2 gap-12">
                       <div className="space-y-12">
                         {[
@@ -974,7 +974,7 @@ export default function AdminPanel({
                                   await supabase.from('settings').upsert({ key_name: s.key, val }, { onConflict: 'key_name' });
                                   refresh();
                                 }}
-                                className="w-full bg-white/5 border border-white/5 rounded-[1.5rem] p-6 text-sm text-white font-semibold outline-none focus:border-accent/40 transition-all"
+                                className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] p-6 text-sm text-white font-semibold outline-none focus:border-accent/40 transition-all"
                               />
                            </div>
                         ))}
@@ -997,14 +997,14 @@ export default function AdminPanel({
                                   await supabase.from('settings').upsert({ key_name: s.key, val }, { onConflict: 'key_name' });
                                   refresh();
                                 }}
-                                className="w-full bg-white/5 border border-white/5 rounded-[1.5rem] p-6 text-sm text-white font-semibold outline-none focus:border-accent/40 transition-all"
+                                className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] p-6 text-sm text-white font-semibold outline-none focus:border-accent/40 transition-all"
                               />
                            </div>
                         ))}
                       </div>
                    </div>
                    
-                   <div className="pt-12 border-t border-white/5 space-y-6">
+                   <div className="pt-12 border-t border-white/10 space-y-6">
                       <div className="flex flex-col">
                         <label className="font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-1">Footer & Branding</label>
                         <p className="text-[10px] text-muted font-medium mb-4">Site-wide footer and school identity</p>
@@ -1017,7 +1017,7 @@ export default function AdminPanel({
                           await supabase.from('settings').upsert({ key_name: 'footer_text', val }, { onConflict: 'key_name' });
                           refresh();
                         }}
-                        className="w-full bg-white/5 border border-white/5 rounded-[2rem] p-8 text-sm text-white font-medium outline-none focus:border-accent/40 transition-all min-h-[150px] resize-none"
+                        className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-8 text-sm text-white font-medium outline-none focus:border-accent/40 transition-all min-h-[150px] resize-none"
                       />
                    </div>
                 </div>
@@ -1028,7 +1028,7 @@ export default function AdminPanel({
         </div>
 
         {loading && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-dark/40 backdrop-blur-sm pointer-events-none">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/40 backdrop-blur-sm pointer-events-none">
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="text-accent animate-spin" size={40} />
               <p className="font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Syncing with DB...</p>
